@@ -24,3 +24,13 @@ ipc.on('getSave', fileData => {
 //     ipc.send('fileSave', fileData);
 //   }
 // });
+
+$(document).ready(function() {
+
+  // Set the scroll positions to equal each other.
+  var editor = ace.edit("editor");
+  var session = editor.getSession();
+  session.on('changeScrollTop', function(scroll) {
+    window.scrollTo(0, scroll);
+  });
+});

@@ -1,5 +1,10 @@
 var app = require('app'); // Module to control application life.
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
+var Menu = require('menu');
+var MenuItem = require('menu-item');
+
+var menu = new Menu();
+
 // var jquery = require('jquery.js');
 
 // Report crashes to our server.
@@ -18,6 +23,24 @@ app.on('window-all-closed', function() {
   }
 });
 
+// Create the menubar
+var template = [{
+  label: 'File',
+  submenu: [{
+    label: 'New',
+    accelerator: 'CmdOrCtrl+N',
+    role: 'new',
+  }, {
+    label: 'Save',
+    accelerator: 'CmdOrCtrl+S',
+    role: 'save',
+  }, {
+    label: 'Save As',
+    accelerator: 'CmdOrCtrlSh+Shift+S',
+    role: 'saveAs',
+  }, ]
+}, ];
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
@@ -35,6 +58,10 @@ app.on('ready', function() {
 
   // Open the DevTools.
   mainWindow.openDevTools();
+
+  // Init the menu
+  menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

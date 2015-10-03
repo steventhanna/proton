@@ -5,6 +5,7 @@ var MenuItem = require('menu-item');
 // var ipc = require('ipc');
 // var remote = require('remote');
 var dialog = require('dialog');
+var fs = require('fs');
 
 var menu = new Menu();
 
@@ -95,6 +96,26 @@ app.on('ready', function() {
         });
         // What do you know it works.
         console.log(filename);
+        if (filename[0] == undefined) {
+          dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -1");
+        } else {
+          try {
+            var string = filename[0];
+            console.log("STRING: " + string);
+            // fs.openSync(string);
+            // var data = fs.readFileSync(path, 'utf8');
+            var data = fs.readFile(string, 'utf8', function(err, data) {
+              if (err) throw err;
+              console.log(data);
+              mainWindow.send('fileContent', data);
+            });
+            // console.log(data);
+          } catch (err) {
+            dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -2");
+            console.log(err);
+          }
+        }
+        // console.log(filename);
       }
     }, {
       label: 'New File',

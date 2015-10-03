@@ -11,7 +11,6 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="depend/jquery.js"></script>
   <script src="depend/marked.js"></script>
-  <script src="index.js"></script>
   <script>
     window.$ = window.jQuery = require('./depend/jquery.js');
   </script>
@@ -76,13 +75,14 @@
       document.getElementById('previewText').innerHTML = marked(text);
     });
 
-    var ipc = require('ipc');
-
-    var fileData = editor.getValue();
-    ipc.send('fileSave', fileData);
+    // var ipc = require('ipc');
+    // var fileData = editor.getValue();
+    // ipc.send('fileSave', fileData);
+    // console.log(fileData);
 
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>

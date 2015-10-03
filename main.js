@@ -130,10 +130,18 @@ app.on('ready', function() {
       label: 'Save',
       accelerator: 'CmdOrCtrl+S',
       click: function() {
+        console.log("Starting file save");
         var string = filename[0];
-        ipc.on('fileSave', fileData => {
-          fs.writeFile(string, fileData, function(err) {
-            if (err) throw err;
+        // NOTE :: Error with ipc
+
+        mainWindow.send('getSave');
+
+        ipc.on('fileSave', function(event, arg) {
+          fs.writeFile(string, arg, 'utf8', function(err) {
+            if (err) {
+              console.log(err);
+              throw err;
+            }
             console.log("FILE SAVED");
           });
         });

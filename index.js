@@ -33,4 +33,9 @@ $(document).ready(function() {
   session.on('changeScrollTop', function(scroll) {
     window.scrollTo(0, scroll);
   });
+
+  $(window).scroll(function() {
+    // session.setScrollTop($(window).scrollTop());
+  });
+
 });

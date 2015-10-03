@@ -28,12 +28,11 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <div id="editor">
-        # This is a test
-        ## I am testing to see how all of this works...
-        ### So far it works pretty well.
+      <div id="editor"># This is a test
+## I am testing to see how all of this works...
+### So far it works pretty well.
 
-        It is pretty awesome that I actually made this.
+It is pretty awesome that I actually made this.
       </div>
     </div>
     <div style="margin-top: 10px;" class="col-lg-6">
@@ -59,6 +58,7 @@
     editor.getSession().setMode("ace/mode/markdown");
     editor.getSession().setUseWrapMode(true);
     editor.renderer.setShowGutter(false);
+    document.getElementById('editor').style.fontSize = '14px';
     marked.setOptions({
       renderer: new marked.Renderer(),
       gfm: true,
@@ -69,6 +69,10 @@
       smartLists: true,
       smartypants: false
     });
+    // First initial render
+    var text = editor.getValue();
+    document.getElementById('previewText').innerHTML = marked(text);
+    // Render on each change
     editor.getSession().on('change', function(e) {
       // e.type, etc
       var text = editor.getValue();

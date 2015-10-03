@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Markdown</title>
+  <title>Proton</title>
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -75,6 +75,12 @@
       var text = editor.getValue();
       document.getElementById('previewText').innerHTML = marked(text);
     });
+
+    var ipc = require('ipc');
+
+    var fileData = editor.getValue();
+    ipc.send('fileSave', fileData);
+
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>

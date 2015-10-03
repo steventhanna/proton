@@ -4,3 +4,5 @@ ipc.on('fileContent', fileData => {
   var editor = ace.edit("editor");
   editor.setValue(fileData);
 });
+
+// Send data for save

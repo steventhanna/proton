@@ -2,7 +2,7 @@ var app = require('app'); // Module to control application life.
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
 var Menu = require('menu');
 var MenuItem = require('menu-item');
-// var ipc = require('ipc');
+var ipc = require('ipc');
 // var remote = require('remote');
 var dialog = require('dialog');
 var fs = require('fs');
@@ -63,6 +63,9 @@ app.on('ready', function() {
   // Open the DevTools.
   mainWindow.openDevTools();
 
+  // Global filename
+  var filename;
+
   var appmenu_template = [{
     label: 'Proton',
     submenu: [{
@@ -86,7 +89,7 @@ app.on('ready', function() {
       accelerator: 'CmdOrCtrl+O',
       click: function() {
         // ipc.send('open-file-dialog')
-        var filename = dialog.showOpenDialog({
+        filename = dialog.showOpenDialog({
           properties: ['openFile'],
           // restrict to markdown files only
           filters: [{
@@ -127,7 +130,13 @@ app.on('ready', function() {
       label: 'Save',
       accelerator: 'CmdOrCtrl+S',
       click: function() {
-        console.log("SAVE FILE CLICKED");
+        var string = filename[0];
+        ipc.on('fileSave', fileData => {
+          fs.writeFile(string, fileData, function(err) {
+            if (err) throw err;
+            console.log("FILE SAVED");
+          });
+        });
       },
     }]
   }, {

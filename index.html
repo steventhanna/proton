@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="jquery.js"></script>
+  <script src="marked.js"></script>
+  <script>
+    window.$ = window.jQuery = require('./jquery.js');
+  </script>
+  <style type="text/css" media="screen">
+    #editor {
+      position: fixed;
+      height: 100%;
+      width: 50%;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div id="editor">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+      </div>
+    </div>
+    <div style="margin-top: 10px;" class="col-lg-6">
+      <div class="container">
+        <div class="row preview-text" id="previewText">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container">
+      <div class="row">
+        <h1>Hello World!</h1>
+        We are using io.js <script>document.write(process.version)</script>
+        and Electron <script>document.write(process.versions['electron'])</script>.
+      </div>
+    </div> -->
+  <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/tomorrow_night_eighties");
+    editor.getSession().setMode("ace/mode/markdown");
+    editor.getSession().setUseWrapMode(true);
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: true,
+      smartLists: true,
+      smartypants: false
+    });
+    editor.getSession().on('change', function(e) {
+      // e.type, etc
+      var text = editor.getValue();
+      document.getElementById('previewText').innerHTML = marked(text);
+    });
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

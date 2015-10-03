@@ -26,25 +26,6 @@ app.on('window-all-closed', function() {
     app.quit();
   }
 });
-
-// Create the menubar
-// var template = [{
-//   label: 'File',
-//   submenu: [{
-//     label: 'New',
-//     accelerator: 'CmdOrCtrl+N',
-//     role: 'new',
-// }, {
-//   label: 'Save',
-//   accelerator: 'CmdOrCtrl+S',
-//   role: 'save',
-// }, {
-//   label: 'Save As',
-//   accelerator: 'CmdOrCtrlSh+Shift+S',
-//   role: 'saveAs',
-// }, ]
-// }, ];
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
@@ -53,6 +34,15 @@ app.on('ready', function() {
     width: 800,
     height: 600,
   });
+
+  var preferences = new BrowserWindow({
+    width: 800,
+    height: 600
+  });
+  preferences.on('closed', function() {
+    win = null;
+  });
+  preferences.loadUrl('file://' + __dirname + '/preferences.html');
 
   // Make the window fill the screen
   mainWindow.maximize();
@@ -75,6 +65,13 @@ app.on('ready', function() {
       }
     }, {
       type: 'separator'
+    }, {
+      label: 'Preferences',
+      accelerator: 'CmdOrCtrl+,',
+      click: function() {
+        console.log("Preferences");
+        preferences.show();
+      }
     }, {
       label: 'Quit',
       accelerator: 'Command+Q',
@@ -104,12 +101,12 @@ app.on('ready', function() {
         } else {
           try {
             var string = filename[0];
-            console.log("STRING: " + string);
+            // console.log("STRING: " + string);
             // fs.openSync(string);
             // var data = fs.readFileSync(path, 'utf8');
             var data = fs.readFile(string, 'utf8', function(err, data) {
               if (err) throw err;
-              console.log(data);
+              // console.log(data);
               mainWindow.send('fileContent', data);
             });
             // console.log(data);

@@ -12,19 +12,6 @@ ipc.on('getSave', fileData => {
   ipc.send('fileSave', fileData);
 });
 
-// // Send data for save
-// $(document).ready(function() {
-//
-//   var editor = ace.edit("editor");
-//   // Hackish thing to do
-//   while (true) {
-//     var fileData = editor.getValue();
-//     console.log(fileData);
-//     // alert(fileData);
-//     ipc.send('fileSave', fileData);
-//   }
-// });
-
 $(document).ready(function() {
 
   // Set the scroll positions to equal each other.

@@ -1,0 +1,2 @@
+PHPSpellcheck--> PHPSpellCheck || PHP Spell Check
+cos--> because

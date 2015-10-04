@@ -17,7 +17,7 @@ require('crash-reporter').start();
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
-var preferences = null;
+// var preferences = null;
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -35,15 +35,16 @@ app.on('ready', function() {
     width: 800,
     height: 600,
   });
-
-  preferences = new BrowserWindow({
-    width: 800,
-    height: 600
-  });
-  preferences.loadUrl('file://' + __dirname + '/preferences.html');
-  preferences.on('closed', function() {
-    win = null;
-  });
+  //
+  // preferences = new BrowserWindow({
+  //   width: 800,
+  //   height: 600
+  // });
+  // preferences.loadUrl('file://' + __dirname + '/preferences.html');
+  // preferences.hide();
+  // preferences.on('closed', function() {
+  // preferences.hide();
+  // });
 
   // Make the window fill the screen
   mainWindow.maximize();
@@ -71,7 +72,8 @@ app.on('ready', function() {
       accelerator: 'CmdOrCtrl+,',
       click: function() {
         console.log("Preferences");
-        preferences.show();
+        // preferences.loadUrl('file://' + __dirname + '/preferences.html');
+        // preferences.show();
       }
     }, {
       label: 'Quit',

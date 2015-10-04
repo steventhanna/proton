@@ -1,0 +1,42 @@
+	
+#livespell___contextmenu ul {	
+	text-align:left;	
+ 		font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+		color:#333;
+		font-size:8px;
+		background-color: #eee;
+}
+#livespell___contextmenu a {
+font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+font-size:11px;	
+}
+#livespell___contextmenu ul select {	
+		background-color: #e8e8e8;
+}
+
+
+#context__back{
+	background-color:#8e8e8e;
+}
+#context__front{
+position:relative;
+background-color:#e8e8e8;
+top	:-2px;
+left:-2px;
+}
+#livespell___contextmenu select {
+height:18px;	
+}
+
+#livespell___contextmenu hr {
+	border-bottom: 1px solid #666;
+}
+
+#livespell___contextmenu a:hover {
+	background-color:#3258f6;
+}
+#livespell___contextmenu select {
+	font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+	font-size:11px;
+	border:none;	
+}

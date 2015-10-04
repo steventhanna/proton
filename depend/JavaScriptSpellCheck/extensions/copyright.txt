@@ -1,0 +1,6 @@
+The extensions in this folder are Open Source extensions and libraries from the internet.  They are not part of our commercial Software package and we do not won nor control copyright..... but they provide useful extensions and examples which we think can help make your project richer.
+
+
+jQuery: http://jquery.com
+modalbox: http://okonet.ru/projects/modalbox
+fancybox: http://fancybox.net

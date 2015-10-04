@@ -1,0 +1,105 @@
+
+
+#livespell___contextmenu ul {
+	font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+	color:#333;
+    background: url("xp.gif") repeat-y scroll left top #F9F8F7;
+    border: 1px solid #666666;
+    padding: 1px;
+	width:175px;
+
+}
+
+#livespell___contextmenu hr {
+	border: 0;
+	margin: 0;
+	border-top: 0;
+	border-bottom:	1px solid #99F;
+	margin: 3px 0px 3px 0px;
+	padding:0;
+
+    border-bottom: 1px solid white;
+    border-top: 1px solid #808080;
+    font-size: 0;
+    margin: 4px 2px;
+}
+#livespell___contextmenu li{
+	font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+    color: black;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 11px;
+    text-align: left;
+	padding-left:22px;
+	padding-right:5px;
+}
+#livespell___contextmenu li.ls_sug{
+font-weight:bold;
+}
+#livespell___contextmenu li.li_lang{
+min-width:140px;
+}
+
+
+#livespell___contextmenu li a {
+    background: none no-repeat scroll 2px center transparent;
+    border: 1px solid #F9F8F7;
+padding: 0;
+margin-bottom:5px;
+}
+#livespell___contextmenu li a:hover {
+    background: none no-repeat scroll 2px center #3399ff;
+    border: 1px solid #0A246A;
+
+}
+#livespell___contextmenu li.ls_hr{
+padding:none;
+margin:none;
+display:none;
+}
+
+
+#context__back{
+	background-color:#999;
+}
+#context__front{
+position:relative;
+background-color:#999;
+top	:-3px;
+left:-3px;
+}
+#livespell___contextmenu select {
+height:22px;
+}
+
+#livespell___contextmenu hr {
+	padding:0;
+	margin:0;
+	border:0;
+	border-top: 1px dotted #666;
+}
+
+#livespell___contextmenu a:hover {
+	background-color:#3258f6;
+}
+#livespell___contextmenu select {
+	font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+	font-size:11px;
+	background-color:#F9F8F7;
+	border:none;
+  	scrollbar-face-color:#EBF5FF;
+	scrollbar-base-color:#EBF5FF;
+	scrollbar-arrow-color:black;
+	scrollbar-track-color:#F3F3F3;
+	scrollbar-shadow-color:#EBF5FF;
+	scrollbar-highlight-color:#EBF5FF;
+	scrollbar-3dlight-color:#78AAFF;
+	scrollbar-darkshadow-Color:#78AAFF;
+}
+#livespell___contextmenu select option {
+	font-family:"Tahoma MS","Tahoma", Arial, sans-serif;
+	font-size:11px;
+	background-color:#F9F8F7;
+	border:none;
+	
+}

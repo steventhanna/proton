@@ -1,0 +1,192 @@
+.livespell_focus_glow {
+  -webkit-transition:  box-shadow 0.30s ease-in-out;
+  -moz-transition:  box-shadow 0.30s ease-in-out;
+  -ms-transition:  box-shadow 0.30s ease-in-out;
+  -o-transition:  box-shadow 0.30s ease-in-out;
+  box-shadow: 0 0 8px rgba(81, 203, 238, 1);
+}
+
+.livespell_redwiggle {
+	background-image:url(wiggle.png);
+	background-repeat:repeat-x;
+	background-position:bottom;
+	cursor: default;
+
+}
+.livespell_greenwiggle {
+	background-image:url(gwiggle.png);
+	background-repeat:repeat-x;
+	background-position:bottom;
+	cursor: default;
+	
+}
+
+.livespell_textarea {
+	border:1px solid #999;
+	background-color:#FFF;
+	width:173px;
+	height:100px;
+	font-size:13px;
+	padding:3px;
+	margin:0px;
+	overflow:auto;
+	font-family: monospace;
+	line-height:13.5px;
+	overflow:auto;
+	white-space: pre-wrap;
+	overflow-y: auto;
+	overflow-x: auto;
+	word-wrap:break-word;
+	display:inline-block;
+	zoom:1; *display: inline; _height: 30px;
+	cursor:text;
+	clear:both;
+}
+.livespell_textarea p 
+{
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+		display: block;
+		line-height: 1;
+
+}
+
+.livespell_textarea span 
+{
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+		display: inline;
+
+}
+
+.ls_input  {
+	overflow:hidden;
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	word-wrap:normal;
+
+}
+
+ .ls_input br {
+		display:none;
+}
+.ls_input p{
+		display:inline;
+}
+
+.livespell_textarea p 
+{
+   margin-top:0;
+   margin-bottom:0;
+}
+
+#livespell___contextmenu {
+	text-align:left;	
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	z-index:111111;
+	overflow:visible;
+}
+#livespell___contextmenu ul {
+	width:155px;
+	-moz-border-radius-topleft:6px;
+	-moz-border-radius-topright:6px;
+	-moz-border-radius-bottomleft:6px;
+	-moz-border-radius-bottomright:6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-webkit-border-top-right-radius: 6px;	
+	-webkit-border-bottom-left-radius: 6px;
+	-webkit-border-top-left-radius: 6px;
+	
+	-moz-box-shadow:0px 5px 20px #ccc;
+	cursor:default;
+	border:1px solid #999;
+	margin: 0;
+
+	padding: 5px !important; /* Major browsers other than IE 6 and below respect the importance immediately */
+	padding: 2px;
+
+	padding-right: 11px;
+	padding-bottom: 7px;
+	list-style-type: none;
+	font-size:smaller;
+	background-color:#fff;
+	color:#111;
+	font-family:"Lucida Grande","Tahoma", Arial, sans-serif;
+}
+
+#livespell___contextmenu hr {
+	border: 0;
+	margin: 0;
+	border-top: 0;
+	border-bottom: 1px dotted #999;
+	margin: 3px 0px 3px 0px;
+	padding:0;
+
+}
+
+#livespell___contextmenu a {
+	padding: 2px;
+	cursor:default;
+	display:block;
+	width:100%;
+	color:#000;
+	text-decoration:none;
+	padding-left:1px;
+	font-size:13px;
+}
+#livespell___contextmenu a:hover {
+	background-color:#3d60f5;
+	color:#FFF;
+}
+#livespell___contextmenu select {
+	border:none;
+	color:#333;
+	font-size:12px;
+	width:98%;
+}
+#livespell___contextmenu input {
+	border:none;
+	color:#333;
+	font-size:smaller;
+}
+#livespell___contextmenu label {
+	font-size:smaller;
+	margin:0;
+	padding:0;
+	height:15px;
+	border-collapse:collapse;
+	border:none;
+	color:#333;
+	background-color:#fff;
+}
+#livespell_contextmenu_multilang_container_noscroll {
+	width:140px;
+	border: 1px dotted #ccc;
+	margin-top:5px;
+}
+.livespell_contextmenu_multilang_container_scroll {
+	width:140px;
+	overflow:auto;
+	height:115px;
+	border: 1px dotted #ccc;
+	margin-top:5px;
+}
+.livespell_invisible {
+	
+	filter:alpha(opacity=0);
+	-moz-opacity:0;
+	-khtml-opacity: 0;
+	opacity: 0;
+	
+}

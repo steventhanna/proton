@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>JavaScriptSpellCheck - Hello World</title>
+	<script type='text/javascript' src=" http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+	<script type='text/javascript' src='include.js' ></script>
+	<script type='text/javascript'>$Spelling.SpellCheckAsYouType('myTextArea')</script>
+</head>
+<body>
+<textarea name="myTextArea"  data-bind='value: myIn' id="myTextArea" cols="10" rows="10"></textarea>
+<h2>The value is: <span data-bind='text: myOut'> </span>!</h2>  
+	
+<input type="button" value="Spell Check" onclick="$Spelling.SpellCheckInWindow('myTextArea')">
+	
+<script>
+	var ViewModel = function(first) {
+	this.myIn = ko.observable(first);  	
+	this.myOut = ko.computed(function() {
+		        return this.myIn() ;
+		    }, this);
+		
+	};
+	ko.applyBindings(new ViewModel("hellob workd")); 
+	</script>	
+</body>
+</html>
+
+

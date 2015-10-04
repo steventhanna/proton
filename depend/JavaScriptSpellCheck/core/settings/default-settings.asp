@@ -1,0 +1,4 @@
+<% 
+SaveToCentralDictionary = false
+LicenseKey = "TRIAL" 
+%>

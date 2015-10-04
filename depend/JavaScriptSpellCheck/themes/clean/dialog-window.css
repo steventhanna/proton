@@ -1,0 +1,398 @@
+
+#LivespellDialogBody {
+color: #333333;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+background-color: #FFF;
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+#ajaxLoader{
+	background-image:url(ajax-loader.gif);
+	background-repeat:no-repeat;
+	width:50px;
+	height:20px;
+}
+#multiLangForm{
+	display:none;
+	}
+#multiLangForm{
+	display:none;
+	}
+#fldTextInput{
+width:330px;
+height:81px;
+position:absolute;
+top:20px;
+left:5px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:12px;
+border-style:inset;
+border-width:1px;
+}
+
+#TextShow{
+cursor:text;
+padding:2px;
+width:330px;
+height:81px;
+position:absolute;
+top:20px;
+left:5px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:12px;
+z-index:2;
+overflow:auto;
+background-color:#FFFFFF;
+border-style:inset;
+border-width:1px;
+}
+
+#lMeaning{
+display:none;
+position:absolute;
+top:112px;
+left:252px;
+}
+#multiLangForm{
+	display:none;
+	position:absolute;
+top:15px;
+left:15px;
+	}
+
+#fldLanguageMultiple{
+width:438px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+	}
+	
+#lMeaning a{
+	color:#009;
+}
+
+#lMeaning a:active{
+	color:#009;
+}
+
+#fldSuggestions{
+width:336px;
+height:84px;
+position:absolute;
+top:127px;
+left:5px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+}
+
+#fldLanguage{
+width:211px;
+position:absolute;
+top:216px;
+left:129px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+}
+
+#highlight{
+font-weight:bold;
+color:#FF0000;
+}
+
+#highlightGrammar{
+font-weight:bold;
+color:#008000;
+}
+
+
+#fldTextInputLab{
+position:absolute;
+top:5px;
+left:6px;
+z-index:1;
+}
+
+#SuggestionsLab{
+position:absolute;
+top:112px;
+left:6px;
+z-index:1;
+}
+
+#fldLanguageLab{
+position:absolute;
+top:218px;
+left:7px;
+z-index:1;
+}
+#CheckGrammarLab{
+position:absolute;
+top:234px;
+left:4px;
+z-index:1;
+}
+#optSentence{
+	margin-right:1px;
+}
+
+#btnIgnore{
+position:absolute;
+top:20px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnUndoManualEdit{
+position:absolute;
+top:20px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+z-index:2;
+display:none;
+}
+#btnIgnoreAll{
+position:absolute;
+top:54px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnAddToDict{
+position:absolute;
+top:85px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnChange{
+position:absolute;
+top:127px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnChangeAll{
+position:absolute;
+top:159px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnAutoCorrect{
+position:absolute;
+top:190px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnCancel{
+position:absolute;
+top:256px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnUndo{
+position:absolute;
+top:256px;
+left:242px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#awayMessage
+{
+display:none;
+color: #999999;
+position:absolute;
+text-align: center;
+top:40%;
+left:0%;
+width:100%;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+}
+#btnShowOptions{
+position:absolute;
+top:256px;
+left:128px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#MainForm{
+display:block;
+}
+#doneForm{
+display:none;	
+	}
+#optForm{
+display:none;
+}
+#tOpt{
+position:absolute;
+top:15px;
+left:12px;
+z-index:1;
+}
+#tOla{
+position:absolute;
+top:170px;
+left:12px;
+z-index:1;
+}
+#btnOptionsOK{
+position:absolute;
+top:256px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+z-index:2;
+}
+#btnOptionsCancel{
+position:absolute;
+top:256px;
+left:242px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnLangOK{
+position:absolute;
+top:241px;
+left:337px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+z-index:2;
+}
+#btnLangCancel{
+position:absolute;
+top:241px;
+left:226px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+#btnResetDict{
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+width:80px;
+}
+#btnResetAutoCorrect{
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+width:80px;
+}
+#btnResetDictLab{
+position:absolute;
+top:115px;
+left:100px;
+z-index:1;
+	}
+#btnResetAutoCorrectLab{
+position:absolute;
+top:140px;
+left:100px;
+z-index:1;
+	}	
+
+#optCaseSensitiveLab{
+position:absolute;
+top:15px;
+left:95px;
+z-index:1;
+}
+#optAllCapsLab{
+position:absolute;
+top:35px;
+left:95px;
+z-index:1;
+}
+#optNumericLab{
+position:absolute;
+top:55px;
+left:95px;
+z-index:1;
+}
+#optSentenceLab{
+position:absolute;
+top:75px;
+left:95px;
+z-index:1;
+}
+#optLanguages{
+width:211px;
+height:82px;
+position:absolute;
+top:170px;
+left:95px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+}
+#tSum{
+position:absolute;
+top:15px;
+left:15px;
+}
+#sdivider{
+width:100%;
+position:absolute;
+top:35px;
+}
+#tWrd{
+position:absolute;
+top:75px;
+left:15px;
+}
+#tDoc{
+position:absolute;
+top:55px;
+left:15px;
+}
+#tEdi{
+position:absolute;
+top:95px;
+left:15px;
+}
+#btnAllDone{
+position:absolute;
+top:256px;
+left:352px;
+width:100px;;
+font-family:Tahoma, Arial, Helvetica, sans-serif;
+font-size:11px;
+height:22px;
+}
+
+
+  

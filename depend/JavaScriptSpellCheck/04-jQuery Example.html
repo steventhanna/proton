@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>JavaScriptSpellCheck with jQuery - Hello World</title>
+	<script type='text/javascript' src='extensions/jquery-1.6.4.min.js' ></script>
+	<script type='text/javascript' src='include.js' ></script>
+
+	<script type='text/javascript' src='extensions/fancybox/jquery.fancybox-1.3.4.pack.js' ></script>
+	<link rel="stylesheet" href="extensions/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	<script type='text/javascript'>
+	$(function() {
+	 	$('textarea').spellAsYouType();
+	});
+	</script>
+
+</head>
+
+<body>
+
+	
+	<textarea name="myTextArea"  id="myTextArea" cols="50" rows="20">Hello Worlb. This Examplee shows JavaScript Spellcheck "as-you-type" and also spellchecking window functionallity on the smae paage.... this time implemented using jQuery and the $() selector. </textarea>
+	<input type="button" value="Spell Check" onclick="$('#myTextArea').spellCheckInDialog({popUpStyle:'fancybox',theme:'clean'})">
+	
+	
+	<br/><br/><br/><a href="http://www.javascriptspellcheck.com/Demos_And_Tutorials">More Examples and Documentation...</a>	
+
+</body>
+</html>

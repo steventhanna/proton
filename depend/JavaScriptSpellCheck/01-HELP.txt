@@ -1,0 +1,22 @@
+Installing JavaScript SpellCheck is easy on any server that supports ASP, PHP or ASP.Net.... almost any modern web host.
+
+There are no dependencies, plug-ins or ActiveX controls to install - the entire solution is self-contained.
+
+The only caveat is that JavaScript SpellCheck will not work in a "file://" development environment (e.g. from your desktop) It will start working when you have uploaded to a web server - or on localhost.
+
+
+  * Download JavaScriptSpellCheck.zip
+  * Unzip The package
+  * Copy it to the root folder of your website - such its url "/JavaScriptSpellCheck"
+  * Open "/JavaScriptSpellCheck/02-TestInstall.html" in your browser to test installation. 
+
+
+Notes:
+
+  * If you are using an ASP.Net server - copy ASPNetSpell.dll from the zip package to the "/bin/ASPNetSpell.dll"
+  * If you hit a snag - read the troubleshooting guide at http://www.javacriptspellcheck.com/Troubleshooting
+  * Sample Code & Examples - online at http://www.javascriptspellcheck.com/Demos_And_Tutorials
+
+Support:
+	
+  * http://www.javascriptspellcheck.com/Support

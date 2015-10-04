@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Test-Install for JavaScript Spell Check</title>
+	<link rel="stylesheet" href="core/test-assets/itest.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<script src="include.js"  type="text/javascript"></script>
+	<script type="text/javascript">
+var msg=""
+var haserror = false;
+
+	function out(type,input){
+		msg+=(  "<div class='"+type+"'>"+input+"</div>")
+		if(type.toLowerCase()=="error"){haserror = true}
+	}
+	
+	outout = function(){
+		document.getElementById('it_hldr').innerHTML = msg;	
+		
+	}
+	outdic = function(){
+		document.getElementById('dic_hldr').innerHTML = msg;	
+	}
+	outcache= function(){
+		document.getElementById('dic_che').innerHTML = msg;	
+	}
+	outfin= function(){
+		document.getElementById('fin_hldr').innerHTML = msg;	
+	}
+	
+	
+	
+	function sect(name){
+		msg+=("<h2>"+name+"</h2>")
+	}
+	
+
+var sendSyncRequest = livespell.testSyncRequest
+   
+					function is_on_a_server(){
+						var url = (document.location.href);
+					 	var 	p = url.indexOf("//")+2;
+						return url.substr(0, p-3).toLowerCase().indexOf('http')>-1;
+					}
+
+	function testInstall(){
+		sect("Basic Installation")
+		if(typeof(JavaScriptSpellCheckObj) !="undefined"){
+		 	out("tick","JavaScriptSpellCheck <em><strong>include.js</strong></em>  file found...")
+		}else{
+			out("error","The file <em><strong>include.js</strong></em> seems to be missing or corrupt. Please make sure that the JavaScript SpellCheck files have all been installed properly.  Have you copied / uploaded these files properly?"); return;
+		}
+		
+		sect("Server Context")
+		if(is_on_a_server ()){out("tick","JavaScriptSpellCheck is Installed on a Web-Server") } else{out("error","To test installation, must access this web-page on a live IIS web server with Classic ASP Support, PHP or ASP.Net 	 Read <a target='_blank' href=http://www.javascriptspellcheck.com/Installation'> The Installation Guide </a> for help on this."); return }
+	
+			sect("Browser Capabilities")
+	    //
+			if(sendSyncRequest ("core/test-assets/test.html")){out("tick","AJAX is Enabled on Your Web Browser") } else{out("error","AJAX is Enabled on Your Web Browser.  Try viewing this page in another browser - perhaps: <em><strong>FireFox , Chrome, Safari, Konqueror, IE6,IE7 IE8 or IE9</strong></em>");return }
+			
+			// END
+		sect("System Capabilities")
+		
+		var modelOK
+		
+		var hasNet = false;
+		
+		
+					if(sendSyncRequest ("core/test-assets/test.aspx")){			if(sendSyncRequest ("core/Default.aspx")){out("tick","<b>ASP.Net</b> server software Installed.") ;  modelOK = true ;} else{out("warn","ASP.Net is enabled on your server - but you have not installed  <em><strong>ASPNetSpell.Dll<em><strong>  to the path <em><strong>/Bin/ASPNetSpell.Dll<em><strong>  of your website.   <a target='_blank' href=http://www.javascriptspellcheck.com/Installation'>Read How...</a>") ;  } }
+					
+        if(sendSyncRequest ("core/test-assets/test.asp")){  		if(sendSyncRequest ("core/default.asp")){out("tick","<b>ASP Classic</b> Server software Installed. ")
+; out("info","Installing <b>ASP.Net</b>will improve speed / performance. "); modelOK = true } 
+else{out("warn","<b>ASP Classic</b> server software did not work.  ASP only works on IIS web-servers - and may require you to update your server's windows script host. <a target='_blank' href=http://www.ehow.com/how_7432762_install-windows-script-host.html'> Update Windows Script Host now....</a>") } } 
+
+
+			
+
+  		if(sendSyncRequest ("core/test-assets/test.php")){		if(sendSyncRequest ("core/index.php")){out("tick","<b>PHP</b> server software Installed.") ; modelOK = true} else{out("warn","PHP requires you to <a target='_blank' href=php.net/downloads.php'>install PHP 5</a>.") }  }
+
+
+
+	
+    
+			sect("Running Test")	
+			
+			if(!modelOK){  out("error","No working server technology found!  You will need to deploy this solution on a server that supports ASP, ASP.Net or PHP.  Read <a target='_blank' href=http://www.javascriptspellcheck.com/Installation'> The Installation Guide </a> for help on this."); return; }
+		
+	     //System capabilities
+		if(sendSyncRequest ("core/")){out("tick","JavaScriptSpellCheck is working and connected to your server.")
+		
+	
+	
+		 } else{
+	
+		
+
+			/*var 	mymodel = livespell.setrubberRingServerModel();
+			var 	code = "<code>&lt;scr"+"ipt language='text/javascr"+"ipt'&gt;$Spelling.ServerModel = \""+mymodel+"\";&lt;"+"/s"+"cript&gt;</code>";
+		out("warn","JavaScriptSpellCheck performance can be enhanced. Add the following code to the header of your pages after <em>inlcude.js</em> has been added:<br/>"+code); 
+			*/
+	
+		
+		}
+		
+	
+	
+	}
+	
+		function testDict(){
+		msg="";
+		sect("Installed Dictionaries");		
+		var dicts = $Spelling.ListDictionaries();
+		var rawpath = document.location.pathname.replace(/02-TestInstall\.html/i,"")
+		var path = rawpath+"dictionaries/"
+
+		if(dicts){
+		var dictlist = "<ul>";
+		for (var i=0;i<dicts.length;i++){
+			dictlist += "<li><b>"+dicts[i]+"</b></li>";
+					
+		}
+		dictlist+="<li><b>custom.txt</b> (add 1 word per line to this custom dictionary to add words easily)</li>"
+		dictlist+="</ul>"
+	}
+		
+		if(dicts && dicts.length){
+
+					out("tick",dictlist);	
+			
+		}else{
+					out("error","No Dictionaries Installed. Check file permissions to "+path  );	
+		}
+		
+			out("info","Additional international dictionaries may be downloaded <b>for free</b> from <a target='_blank' href='http://www.javascriptspellcheck.com/Installing_JavaScript_SpellCheck_Dictionaries'>http://www.javascriptspellcheck.com/Installing_JavaScript_SpellCheck_Dictionaries</a>.  Just download, unzip and copy to the dictionary folder"  );	
+			
+						out("info","Your Dictionary Folder is: <em>"+path+"</em>");
+	
+		}
+		
+		function cacherem(){
+			msg="";
+				if( haserror){
+			sect("Important Notice Before Re-Testing");		
+			out("reup","<em>Clear your browser cache</em> before re-running this test.");
+		}else{
+				sect("Re-Testing");			
+				out("reupclean","<em>Clear your browser cache</em> before re-running this test.");	
+				
+			}
+			
+		}
+		
+			function fin(){
+				msg="";
+					if(! haserror){
+				sect("Installation Complete");		
+					out("tick","<h2>Well Done.  Your installation of JavaScriptSpellCheck was 100% successful</h2>");
+				out("info","<p><a href='03-Example.html'> Now lets try out an example...</p>");
+		}
+
+			}
+		
+		
+			function testSeq(){
+				testInstall(); outout(); if(!haserror){testDict();outdic();} cacherem();outcache(); fin();outfin();
+			}
+			
+	</script>
+	
+	
+
+</head>
+<body onload='testSeq()'>
+<h1>SpellChecker Installation Test</h1>	
+<div id="it_hldr"> </div>
+<div id="dic_hldr"> </div>
+<div id="dic_che"> </div>
+<div id="fin_hldr"> </div>
+
+</body>
+</html>

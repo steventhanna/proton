@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>JavaScriptSpellCheck - Hello World</title>
+	<script type='text/javascript' src='include.js' ></script>
+	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+	<script type="text/javascript">
+	tinymce.init({
+	    selector: "textarea"
+	 });
+	</script>
+</head>
+<body>
+	
+	<textarea name="myTextArea"  id="myTextArea" cols="50" rows="20">Hello Worlb. This Example show JavaScript Spellcheck working with
+		ritch HTML editros.  The example is TinyMCE - but we support most alll popular WYSIWYGS of editos.  Just do this:
+		<br><br>
+		 $Spelling.SpellCheckInWindow('<strong>editors</strong>');  
+		<br><br>
+		Its automatick and easy to implement!
+		 </textarea>
+	<input type="button" value="Spell Check" onclick="$Spelling.SpellCheckInWindow('editors')">
+	
+	
+	<br/><br/><br/><a href="http://www.javascriptspellcheck.com/Demos_And_Tutorials">More Examples and Documentation...</a>	
+
+</body>
+</html>
+
+

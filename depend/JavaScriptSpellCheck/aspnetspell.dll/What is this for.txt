@@ -1,0 +1,9 @@
+What is this?
+
+  * If you are using an ASP.Net server - copy ASPNetSpell.dll from the zip package to the "/bin/ASPNetSpell.dll"
+  * If you are using PHP or Classic ASP - you do not need to upload or install this folder.
+  * If you hit a snag - read the troubleshooting guide at http://www.javascriptspellcheck.com/Troubleshooting
+
+Support:
+	
+  * Email support@javascriptspellcheck.com

@@ -1,0 +1,43 @@
+body{
+font-family:Arial, Helvetica, sans-serif; 
+font-size:13px;
+background-color: #F9F8F7;
+margin:30px;
+}
+.tick, .warn, .warning, .error, .validation, .info , .reup, .reupclean {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
+.tick {
+color: #00529B;
+background-color: #BDE5F8;
+background-image: url('tick.png');
+}
+.warn {
+color: #4F8A10;
+background-color: #DFF2BF;
+background-image:url('warn.png');
+}
+.error {
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('error.png');
+}
+.info {
+color: #333;
+background-color: #BAFFBA;
+background-image: url('info.png');
+}
+.reup {
+color: #D8000C;
+background-color: #FFBABA;
+background-image: url('reup.png');
+}
+.reupclean {
+color: #666;
+background-color: #BDE5F8;
+background-image: url('reup.png');
+}

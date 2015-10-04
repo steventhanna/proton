@@ -86,6 +86,7 @@ app.on('ready', function() {
           dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -1");
         } else {
           try {
+            filename = filename[0];
             var string = filename[0];
             var data = fs.readFile(string, 'utf8', function(err, data) {
               if (err) throw err;
@@ -109,8 +110,6 @@ app.on('ready', function() {
       click: function() {
         console.log("Starting file save");
         var string = filename[0];
-        // NOTE :: Error with ipc
-
         mainWindow.send('getSave');
 
         ipc.on('fileSave', function(event, arg) {
@@ -123,6 +122,34 @@ app.on('ready', function() {
           });
         });
       },
+    }, {
+      label: 'Save As',
+      accelerator: 'CmdOrCtrl+Shift+S',
+      click: function() {
+        var file;
+        dialog.showSaveDialog(mainWindow, function(fileName) {
+          console.log("DIALOG");
+          file = fileName;
+          filename = file;
+          mainWindow.send('getSaveAs');
+        });
+        ipc.on('fileSaveAs', function(event, arg) {
+          console.log("FILETRIGGER");
+          fs.writeFile(file, arg, 'utf8', function(err) {
+            console.log("WRITEFILE");
+            if (err) {
+              console.log(err);
+              throw err;
+            }
+            console.log("NEW FILE SAVED");
+            // open the file now
+            var data = fs.readFile(file, 'utf8', function(err, data) {
+              if (err) throw err;
+              mainWindow.send('fileContent', data);
+            });
+          });
+        });
+      }
     }]
   }, {
     label: 'Edit',

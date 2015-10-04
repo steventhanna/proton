@@ -12,6 +12,14 @@ ipc.on('getSave', fileData => {
   ipc.send('fileSave', fileData);
 });
 
+ipc.on('getSaveAs', fileData => {
+  console.log("GETSAVETRIGGER");
+  var editor = ace.edit("editor");
+  var fileData = editor.getValue();
+  console.log(fileData);
+  ipc.send('fileSaveAs', fileData);
+});
+
 $(document).ready(function() {
 
   // Set the scroll positions to equal each other.

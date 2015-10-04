@@ -46,22 +46,28 @@
       </div>
     </div> -->
   <script src="depend/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="depend/src-noconflict/ext-language_tools.js"></script>
   <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow_night_eighties");
     editor.getSession().setMode("ace/mode/markdown");
     editor.getSession().setUseWrapMode(true);
     editor.renderer.setShowGutter(false);
+    editor.setOptions({
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: false
+    });
     document.getElementById('editor').style.fontSize = '14px';
     marked.setOptions({
       renderer: new marked.Renderer(),
       gfm: true,
       tables: true,
-      breaks: false,
-      pedantic: false,
+      breaks: true,
+      pedantic: true,
       sanitize: true,
       smartLists: true,
-      smartypants: false
+      smartypants: true
     });
     // First initial render
     var text = editor.getValue();

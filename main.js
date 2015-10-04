@@ -77,7 +77,7 @@ app.on('ready', function() {
       label: 'Quit',
       accelerator: 'Command+Q',
       click: function() {
-        ipc.send('close')
+        app.quit();
       }
     }]
   }, {

@@ -75,7 +75,8 @@ app.on('ready', function() {
         // ipc.send('open-file-dialog')
         var fileArray = dialog.showOpenDialog({
           properties: ['openFile'],
-          // restrict to markdown files only
+          // restrict to markdown files only for now
+          // TODO :: Add TEX functionality
           filters: [{
             name: 'Markdown',
             extensions: ['md']
@@ -192,26 +193,25 @@ app.on('ready', function() {
     }, {
       label: 'Toggle Full Screen',
       accelerator: 'Command+Enter',
-      // click: onfullscreentoggle
+      click: function() {
+        if (mainWindow.isFullScreen() == true) {
+          mainWindow.setFullScreen(false);
+        } else {
+          mainWindow.setFullScreen(true);
+        }
+      }
     }]
   }, {
     label: 'Help',
     submenu: [{
       label: 'Report Issue',
       click: function() {
-        ipc.send('open-url-in-external', 'https://github.com/mafintosh/playback/issues')
+        ipc.send('open-url-in-external', 'https://github.com/steventhanna/proton/issues')
       }
     }, {
       label: 'View Source Code on GitHub',
       click: function() {
-        ipc.send('open-url-in-external', 'https://github.com/mafintosh/playback')
-      }
-    }, {
-      type: 'separator'
-    }, {
-      label: 'Releases',
-      click: function() {
-        ipc.send('open-url-in-external', 'https://github.com/mafintosh/playback/releases')
+        ipc.send('open-url-in-external', 'https://github.com/steventhanna/proton')
       }
     }]
   }]

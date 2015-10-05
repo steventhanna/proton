@@ -84,7 +84,12 @@ app.on('ready', function() {
         });
         // Since we do not have multiple selections enabled, only take first
         // item in first index
-        filename = fileArray[0];
+        if (fileArray != undefined && fileArray.length !== 0) {
+          filename = fileArray[0];
+        } else {
+          console.log("Well, there seems to be a problem with the file array");
+          return;
+        }
         console.log(filename);
         if (filename == undefined) {
           dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -1");
@@ -93,6 +98,7 @@ app.on('ready', function() {
             var data = fs.readFile(filename, 'utf8', function(err, data) {
               if (err) throw err;
               mainWindow.send('fileContent', data);
+              mainWindow.setTitle(filename + " | Proton");
             });
           } catch (err) {
             dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -2");
@@ -113,15 +119,18 @@ app.on('ready', function() {
       click: function() {
         console.log("Starting file save");
         mainWindow.send('getSave');
-
         ipc.on('fileSave', function(event, arg) {
-          fs.writeFile(filename, arg, 'utf8', function(err) {
-            if (err) {
-              console.log(err);
-              throw err;
-            }
-            console.log("FILE SAVED");
-          });
+          if (filename != undefined) {
+            fs.writeFile(filename, arg, 'utf8', function(err) {
+              if (err) {
+                console.log(err);
+                throw err;
+              }
+              console.log("FILE SAVED");
+            });
+          } else {
+            console.log("Nothing to save.");
+          }
         });
       },
     }, {
@@ -148,6 +157,7 @@ app.on('ready', function() {
             var data = fs.readFile(filename, 'utf8', function(err, data) {
               if (err) throw err;
               mainWindow.send('fileContent', data);
+              mainWindow.setTitle(filename + " | Proton");
             });
           });
         });
@@ -188,17 +198,17 @@ app.on('ready', function() {
       label: 'Minimize',
       accelerator: 'Command+M',
       click: function() {
-        ipc.send('minimize')
+        if (mainWindow.isMinimized() == true) {
+          mainWindow.restore();
+        } else {
+          mainWindow.minimize();
+        }
       }
     }, {
       label: 'Toggle Full Screen',
       accelerator: 'Command+Enter',
       click: function() {
-        if (mainWindow.isFullScreen() == true) {
-          mainWindow.setFullScreen(false);
-        } else {
-          mainWindow.setFullScreen(true);
-        }
+        mainWindow.setFullScreen(!mainWindow.isFullScreen());
       }
     }]
   }, {

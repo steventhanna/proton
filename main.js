@@ -73,7 +73,7 @@ app.on('ready', function() {
       accelerator: 'CmdOrCtrl+O',
       click: function() {
         // ipc.send('open-file-dialog')
-        filename = dialog.showOpenDialog({
+        var fileArray = dialog.showOpenDialog({
           properties: ['openFile'],
           // restrict to markdown files only
           filters: [{
@@ -81,14 +81,15 @@ app.on('ready', function() {
             extensions: ['md']
           }],
         });
+        // Since we do not have multiple selections enabled, only take first
+        // item in first index
+        filename = fileArray[0];
         console.log(filename);
-        if (filename[0] == undefined) {
+        if (filename == undefined) {
           dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -1");
         } else {
           try {
-            filename = filename[0];
-            var string = filename[0];
-            var data = fs.readFile(string, 'utf8', function(err, data) {
+            var data = fs.readFile(filename, 'utf8', function(err, data) {
               if (err) throw err;
               mainWindow.send('fileContent', data);
             });
@@ -99,6 +100,7 @@ app.on('ready', function() {
         }
       }
     }, {
+      // TODO :: Implement New File
       label: 'New File',
       accelerator: 'CmdOrCtrl+N',
       click: function() {
@@ -109,11 +111,10 @@ app.on('ready', function() {
       accelerator: 'CmdOrCtrl+S',
       click: function() {
         console.log("Starting file save");
-        var string = filename[0];
         mainWindow.send('getSave');
 
         ipc.on('fileSave', function(event, arg) {
-          fs.writeFile(string, arg, 'utf8', function(err) {
+          fs.writeFile(filename, arg, 'utf8', function(err) {
             if (err) {
               console.log(err);
               throw err;
@@ -135,7 +136,7 @@ app.on('ready', function() {
         });
         ipc.on('fileSaveAs', function(event, arg) {
           console.log("FILETRIGGER");
-          fs.writeFile(file, arg, 'utf8', function(err) {
+          fs.writeFile(filename, arg, 'utf8', function(err) {
             console.log("WRITEFILE");
             if (err) {
               console.log(err);
@@ -143,7 +144,7 @@ app.on('ready', function() {
             }
             console.log("NEW FILE SAVED");
             // open the file now
-            var data = fs.readFile(file, 'utf8', function(err, data) {
+            var data = fs.readFile(filename, 'utf8', function(err, data) {
               if (err) throw err;
               mainWindow.send('fileContent', data);
             });

@@ -5,6 +5,21 @@ var MenuItem = require('menu-item');
 var ipc = require('ipc');
 var dialog = require('dialog');
 var fs = require('fs');
+// var pdf = require('html-pdf');
+var marked = require('marked');
+var markdownpdf = require('markdown-pdf');
+
+// Init marked
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: true,
+  pedantic: true,
+  sanitize: true,
+  smartLists: true,
+  smartypants: true
+});
 
 var menu = new Menu();
 
@@ -159,6 +174,31 @@ app.on('ready', function() {
               mainWindow.send('fileContent', data);
               mainWindow.setTitle(filename + " | Proton");
             });
+          });
+        });
+      }
+    }, {
+      label: 'Export to PDF',
+      accelerator: 'CmdOrCtrl+E',
+      click: function() {
+        // Get destination file location from user
+        var options = {
+          format: 'Letter',
+          cssPath: 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+          highlightCssPath: 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'
+        };
+        dialog.showSaveDialog(mainWindow, function(destination) {
+          fs.readFile(filename, 'utf8', function(err, data) {
+            if (err) throw err;
+            // console.log(marked(data));
+            markdownpdf().from(filename).to(destination),
+              function() {
+                console.log("Done");
+              }
+              // pdf.create(marked(data), options).toFile(destination, function(err, res) {
+              //   if (err) return console.log(err);
+              //   console.log(res);
+              // });
           });
         });
       }

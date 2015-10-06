@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
   <link rel="stylesheet" href="depend/style.css">
   <!-- Latest compiled and minified JavaScript -->
   <script src="depend/jquery.js"></script>
@@ -47,12 +48,14 @@
     </div> -->
   <script src="depend/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="depend/src-noconflict/ext-language_tools.js"></script>
+  <!-- //cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css -->
   <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow_night_eighties");
     editor.getSession().setMode("ace/mode/markdown");
     editor.getSession().setUseWrapMode(true);
     editor.renderer.setShowGutter(false);
+    document.getElementById('editor').style.fontFamily = 'Hack, monospace';
     editor.setOptions({
       enableBasicAutocompletion: true,
       enableSnippets: true,

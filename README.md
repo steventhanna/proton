@@ -24,5 +24,5 @@ Proton is licensed under the GNU General Public License.  Read the license [here
 - [Bootstrap](http://getbootstrap.com)
 - [Marked.js](https://github.com/chjj/marked)
 - [Ace Editor](http://ace.c9.io/#nav=about)
-
+- [Hack Typeface](https://github.com/chrissimpkins/Hack)
 

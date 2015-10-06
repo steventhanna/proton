@@ -2,13 +2,18 @@
 A stand-alone application to quickly preview and edit Markdown files using Electron.
 
 ## Purpose
-As a college student, I needed a way to quickly take rich notes in class.  I have long been a proponent of the Markdown Language, so I decided to download [MacDown](http://macdown.uranusjr.com/) for easy rendering and viewing.  However, upon an OS update on my local machine, the Markdown rendering broke.  Thus, I decided to build my own open-sourced version that is supported on Windows, OSX, and Linux machines.
+As a college student, I needed a way to quickly take rich notes in class.  I have long been a proponent of the Markdown Language, so I decided to download [MacDown](http://macdown.uranusjr.com/) for easy rendering and viewing.  However, upon an OS update on my local machine, the Markdown rendering broke.  Thus, I decided to build my own open-sourced version that is supported on Windows, OSX, and Linux machines using the [Electron Framework]((https://github.com/atom/electron).
 
 ## Installation
 1. Clone repo: `git clone git@github.com:steventhanna/proton.git`
 2. Change to repo: `cd PATH$TO$REPO`
 3. Install dependencies: `npm install`
-4. Start electron: `electron .`
+
+## Usage
+1. Start electron: `electron .`
+
+## Tests
+No tests yet, but they will be here eventually.
 
 ## Contributing
 1. Fork it!

@@ -181,7 +181,6 @@ app.on('ready', function() {
       label: 'Export to PDF',
       accelerator: 'CmdOrCtrl+E',
       click: function() {
-        // Get destination file location from user
         var options = {
           format: 'Letter',
           border: {
@@ -192,18 +191,18 @@ app.on('ready', function() {
           },
         };
         dialog.showSaveDialog(mainWindow, function(destination) {
-          fs.readFile(filename, 'utf8', function(err, data) {
-            if (err) throw err;
-            // console.log(marked(data));
-
-            var info = marked(data);
-            info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
-            // Remove exention
-            pdf.create(info, options).toFile(destination, function(err, res) {
-              if (err) throw err;
-              console.log(res);
+          if (filename !== undefined) {
+            fs.readFile(filename, 'utf8', function(err, data) {
+              // if (err) throw err;
+              var info = marked(data);
+              info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
+              // Remove exention
+              pdf.create(info, options).toFile(destination, function(err, res) {
+                if (err) throw err;
+                console.log(res);
+              });
             });
-          });
+          }
         });
       }
     }]

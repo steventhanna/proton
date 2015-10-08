@@ -185,6 +185,7 @@ app.on('ready', function() {
         var options = {
           format: 'Letter',
           cssPath: 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+          cssPath: 'depend/github-markdown.css',
           highlightCssPath: 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'
         };
         dialog.showSaveDialog(mainWindow, function(destination) {

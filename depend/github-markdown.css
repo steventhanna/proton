@@ -66,6 +66,12 @@ body {
   border-radius: 5px;
 }
 
+.markdown-body pre {
+  background-color: #b3b3b3;
+  color: #000;
+  border-radius: 5px;
+}
+
 .markdown-body input {
   color: inherit;
   font: inherit;

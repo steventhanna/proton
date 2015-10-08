@@ -5,7 +5,7 @@ var MenuItem = require('menu-item');
 var ipc = require('ipc');
 var dialog = require('dialog');
 var fs = require('fs');
-// var pdf = require('html-pdf');
+var pdf = require('html-pdf');
 var marked = require('marked');
 var markdownpdf = require('markdown-pdf');
 
@@ -184,22 +184,25 @@ app.on('ready', function() {
         // Get destination file location from user
         var options = {
           format: 'Letter',
-          cssPath: 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-          cssPath: 'depend/github-markdown.css',
-          highlightCssPath: 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'
+          border: {
+            top: '.5in',
+            right: '.25in',
+            bottom: '.5in',
+            left: '.25in'
+          },
         };
         dialog.showSaveDialog(mainWindow, function(destination) {
           fs.readFile(filename, 'utf8', function(err, data) {
             if (err) throw err;
             // console.log(marked(data));
-            markdownpdf().from(filename).to(destination),
-              function() {
-                console.log("Done");
-              }
-              // pdf.create(marked(data), options).toFile(destination, function(err, res) {
-              //   if (err) return console.log(err);
-              //   console.log(res);
-              // });
+
+            var info = marked(data);
+            info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
+            // Remove exention
+            pdf.create(info, options).toFile(destination, function(err, res) {
+              if (err) throw err;
+              console.log(res);
+            });
           });
         });
       }

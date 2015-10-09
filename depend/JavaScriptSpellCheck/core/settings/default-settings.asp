@@ -1,4 +1,0 @@
-<% 
-SaveToCentralDictionary = false
-LicenseKey = "TRIAL" 
-%>

@@ -1,0 +1,45 @@
+.body {
+  padding-top: 70px;
+}
+
+.header {
+  background-color: #9b59b6;
+  color: #fff;
+  padding-bottom: 50px;
+}
+
+.header h1 {
+  font-weight: 300;
+  font-size: 48px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.header h3 {
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: center;
+}
+
+.navbar-default {
+  background-color: #9b59b6;
+  color: #fff;
+  border-color: #9b59b6;
+}
+
+.navbar .navbar-brand {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+}

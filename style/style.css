@@ -14,7 +14,6 @@
   letter-spacing: 1px;
   color: #fff;
   text-align: center;
-  margin-top: 100px;
 }
 
 .header h3 {
@@ -23,6 +22,15 @@
   letter-spacing: 1px;
   color: #fff;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.header img {
+  margin-top: 50px;
+  text-align: center;
+  height: 300px;
+  width: auto;
 }
 
 .navbar-default {
@@ -42,4 +50,66 @@
   color: #fff;
   font-size: 18px;
   font-weight: 300;
+}
+
+.color-purple {
+  color: #703b8c;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.row-title {
+  font-weight: 300;
+}
+
+.row-title h1 {
+  font-weight: 300;
+  font-size: 52px;
+  margin-bottom: 0px;
+}
+
+.row-title h3 {
+  margin-top: 10px;
+  color: #787878;
+  font-weight: 300;
+  font-size: 28px;
+}
+
+.row p {
+  font-size: 16px;
+}
+
+.row a {
+  color: #703b8c;
+}
+
+.content-panel-white {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.content-panel-white p {
+  font-size: 16px;
+}
+
+footer {
+  background-color: #9b59b6;
+  color: #fff;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+footer a {
+  color: #fff;
 }

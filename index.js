@@ -26,9 +26,13 @@ $(document).ready(function() {
   var editor = ace.edit("editor");
   var session = editor.getSession();
   session.on('changeScrollTop', function(scroll) {
+    console.log(session.getScreenLength());
+    // console.log("SCROLL: " + scroll);
+    // console.log((scroll / session.getScreenLength()) * 10);
     window.scrollTo(0, scroll);
   });
 
+  var scrollPercentage = 100 * this.scrollBottom / (this.scrollHeight - this.clientHeight);
   $(window).scroll(function() {
     // session.setScrollTop($(window).scrollTop());
   });

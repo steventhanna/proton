@@ -38,6 +38,8 @@ app.on('window-all-closed', function() {
     app.quit();
   }
 });
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
@@ -58,6 +60,22 @@ app.on('ready', function() {
 
   // Global filename
   var filename;
+
+  // Save function
+  function save(arg) {
+    if (filename != undefined) {
+      fs.writeFile(filename, arg, 'utf8', function(err) {
+        if (err) {
+          console.log(err);
+          throw err;
+        } else {
+          return true;
+        }
+      });
+    } else {
+      return false;
+    }
+  }
 
   var appmenu_template = [{
     label: 'Proton',
@@ -135,16 +153,8 @@ app.on('ready', function() {
         console.log("Starting file save");
         mainWindow.send('getSave');
         ipc.on('fileSave', function(event, arg) {
-          if (filename != undefined) {
-            fs.writeFile(filename, arg, 'utf8', function(err) {
-              if (err) {
-                console.log(err);
-                throw err;
-              }
-              console.log("FILE SAVED");
-            });
-          } else {
-            console.log("Nothing to save.");
+          if (save(arg)) {
+            // Put a banner or a notification in here
           }
         });
       },
@@ -161,20 +171,13 @@ app.on('ready', function() {
         });
         ipc.on('fileSaveAs', function(event, arg) {
           console.log("FILETRIGGER");
-          fs.writeFile(filename, arg, 'utf8', function(err) {
-            console.log("WRITEFILE");
-            if (err) {
-              console.log(err);
-              throw err;
-            }
-            console.log("NEW FILE SAVED");
-            // open the file now
+          if (save(arg)) {
             var data = fs.readFile(filename, 'utf8', function(err, data) {
               if (err) throw err;
               mainWindow.send('fileContent', data);
               mainWindow.setTitle(filename + " | Proton");
             });
-          });
+          }
         });
       }
     }, {

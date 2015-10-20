@@ -53,13 +53,24 @@ app.on('ready', function() {
   mainWindow.maximize();
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  // Determine extension type
+  if (extension === "md") {
+    mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
+  } else if (extension === "tex") {
+    mainWindow.loadUrl('file://' + __dirname + '/tex.html');
+  } else {
+    // Just load the markdown
+    mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
+  }
+
 
   // Open the DevTools.
   mainWindow.openDevTools();
 
   // Global filename
   var filename;
+  // Global Extension
+  var extension;
 
   // Save function
   function save(arg) {
@@ -105,23 +116,32 @@ app.on('ready', function() {
       label: 'Open File',
       accelerator: 'CmdOrCtrl+O',
       click: function() {
-        // ipc.send('open-file-dialog')
         var fileArray = dialog.showOpenDialog({
           properties: ['openFile'],
-          // restrict to markdown files only for now
-          // TODO :: Add TEX functionality
           filters: [{
-            name: 'Markdown',
-            extensions: ['md']
+            name: 'Markdown, LaTeX',
+            extensions: ['md', 'tex']
           }],
         });
         // Since we do not have multiple selections enabled, only take first
         // item in first index
         if (fileArray != undefined && fileArray.length !== 0) {
           filename = fileArray[0];
+          var filenameArr = filename.split('.');
+          extension = filenameArr[1];
         } else {
           console.log("Well, there seems to be a problem with the file array");
           return;
+        }
+        if (extension != null) {
+          if (extension === "md") {
+            mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
+          } else if (extension === "tex") {
+            mainWindow.loadUrl('file://' + __dirname + '/tex.html');
+          } else {
+            // Just load the markdown
+            mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
+          }
         }
         console.log(filename);
         if (filename == undefined) {

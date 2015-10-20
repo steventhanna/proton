@@ -134,7 +134,9 @@ app.on('ready', function() {
           try {
             var data = fs.readFile(filename, 'utf8', function(err, data) {
               if (err) throw err;
-              mainWindow.send('fileContent', data);
+              if (mainWindow.send('fileContent', data)) {
+                mainWindow.send('extension', extension);
+              }
               mainWindow.setTitle(filename + " | Proton");
             });
           } catch (err) {

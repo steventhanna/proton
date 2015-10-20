@@ -3,8 +3,12 @@ var ipc = require('ipc');
 ipc.on('fileContent', fileData => {
   console.log("GOT FILE CONTENT");
   console.log(fileData);
+  // Set editor language
   var editor = ace.edit("editor");
   editor.setValue(fileData);
+  ipc.on('extension', extension => {
+    editor.getSession().setMode("ace/mode/tex");
+  });
 });
 
 ipc.on('getSave', fileData => {

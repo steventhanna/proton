@@ -54,14 +54,8 @@ app.on('ready', function() {
 
   // and load the index.html of the app.
   // Determine extension type
-  if (extension === "md") {
-    mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
-  } else if (extension === "tex") {
-    mainWindow.loadUrl('file://' + __dirname + '/tex.html');
-  } else {
-    // Just load the markdown
-    mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
-  }
+  // I should eventually make a splashscreen
+  mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
 
 
   // Open the DevTools.
@@ -127,21 +121,11 @@ app.on('ready', function() {
         // item in first index
         if (fileArray != undefined && fileArray.length !== 0) {
           filename = fileArray[0];
-          var filenameArr = filename.split('.');
+          filenameArr = filename.split('.');
           extension = filenameArr[1];
         } else {
           console.log("Well, there seems to be a problem with the file array");
           return;
-        }
-        if (extension != null) {
-          if (extension === "md") {
-            mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
-          } else if (extension === "tex") {
-            mainWindow.loadUrl('file://' + __dirname + '/tex.html');
-          } else {
-            // Just load the markdown
-            mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
-          }
         }
         console.log(filename);
         if (filename == undefined) {

@@ -74,12 +74,22 @@ app.on('ready', function() {
           console.log(err);
           throw err;
         } else {
+          error('success', "<strong>Success!</strong> File Saved");
           return true;
         }
       });
     } else {
+      error('danger', "<strong>Uh-Oh!</strong> The file could not be saved");
       return false;
     }
+  }
+
+  function error(type, message) {
+    var data = {
+      type: type,
+      message: message
+    };
+    mainWindow.send('error', data);
   }
 
   var appmenu_template = [{
@@ -110,6 +120,7 @@ app.on('ready', function() {
       label: 'Open File',
       accelerator: 'CmdOrCtrl+O',
       click: function() {
+        error('success', "Opening a file");
         var fileArray = dialog.showOpenDialog({
           properties: ['openFile'],
           filters: [{
@@ -124,6 +135,7 @@ app.on('ready', function() {
           filenameArr = filename.split('.');
           extension = filenameArr[1];
         } else {
+          error('danger', "There was a problem.");
           console.log("Well, there seems to be a problem with the file array");
           return;
         }
@@ -141,6 +153,7 @@ app.on('ready', function() {
             });
           } catch (err) {
             dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -2");
+            error('danger', "The file could not be opened.");
             console.log(err);
           }
         }
@@ -161,6 +174,7 @@ app.on('ready', function() {
         ipc.on('fileSave', function(event, arg) {
           if (save(arg)) {
             // Put a banner or a notification in here
+
           }
         });
       },

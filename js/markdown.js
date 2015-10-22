@@ -45,6 +45,14 @@ ipc.on('fileContent', fileData => {
   });
 });
 
+
+
+ipc.on('error', errorMessage => {
+  var type = errorMessage.type;
+  var message = errorMessage.message;
+  document.getElementById('error').innerHTML = '<div style="margin-right: 10px;" class="alert alert-' + type + ' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + message + '</div>';
+});
+
 ipc.on('getSave', fileData => {
   var editor = ace.edit("editor");
   var fileData = editor.getValue();

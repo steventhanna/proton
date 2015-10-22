@@ -66,7 +66,7 @@ app.on('ready', function() {
   // Global Extension
   var extension;
 
-  // Save function
+  /** Save function **/
   function save(arg) {
     if (filename != undefined) {
       fs.writeFile(filename, arg, 'utf8', function(err) {

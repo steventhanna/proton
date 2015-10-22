@@ -23,6 +23,10 @@
     window.$ = window.jQuery = require('./depend/jquery.js');
   </script>
   <style type="text/css" media="screen">
+    html {
+      overflow-x: hidden;
+    }
+
     #editor {
       position: fixed;
       height: 100%;
@@ -39,6 +43,10 @@
       <div id="editor"></div>
     </div>
     <div style="margin-top: 10px;" class="col-lg-6">
+      <div style="margin-right: 10px" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.
+      </div>
       <div class="container">
         <div class="row preview-text" id="previewText"></div>
       </div>

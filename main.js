@@ -117,14 +117,14 @@ app.on('ready', function() {
   var appmenu_template = [{
     label: 'Proton',
     submenu: [{
-      // About the project
-      label: 'About Proton',
-      click: function() {
-        shell.openExternal('https://steventhanna.github.io/proton');
-      }
-    }, {
-      type: 'separator'
-    }, {
+        // About the project
+        label: 'About Proton',
+        click: function() {
+          shell.openExternal('https://steventhanna.github.io/proton');
+        }
+      }, {
+        type: 'separator'
+      }, // {
       // Preferences
       // TODO :: Implement this
       // label: 'Preferences',
@@ -132,14 +132,16 @@ app.on('ready', function() {
       // click: function() {
       //   console.log("Preferences");
       // }
-    }, {
-      // Quit the application
-      label: 'Quit',
-      accelerator: 'Command+Q',
-      click: function() {
-        app.quit();
+      /* }, */
+      {
+        // Quit the application
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: function() {
+          app.quit();
+        }
       }
-    }]
+    ]
   }, {
     label: 'File',
     submenu: [{

@@ -1,15 +1,23 @@
-var app = require('app'); // Module to control application life.
-var BrowserWindow = require('browser-window'); // Module to create native browser window.
+// Module to control application life.
+var app = require('app');
+// Module to create native browser window.
+var BrowserWindow = require('browser-window');
+// Module to create the application menu
 var Menu = require('menu');
+// Module to create the individual items within the menu
 var MenuItem = require('menu-item');
+// Module to handle communication between main and renderer processes
 var ipc = require('ipc');
+// Module to handle native dialog boxes
 var dialog = require('dialog');
+// Module to control file creation
 var fs = require('fs');
+// Module to create a PDF from HTML content
 var pdf = require('html-pdf');
+// Module to render Markdown into HMTL
 var marked = require('marked');
-var markdownpdf = require('markdown-pdf');
 
-// Init marked
+// Set marked renderer settings
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -21,9 +29,10 @@ marked.setOptions({
   smartypants: true
 });
 
+// Initialize the menu
 var menu = new Menu();
 
-// Report crashes to our server.
+// Report crashes to the Electron server.
 require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -45,6 +54,7 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    // These values really don't matter, since the window will just be maximized
     width: 800,
     height: 600,
   });
@@ -52,26 +62,29 @@ app.on('ready', function() {
   // Make the window fill the screen
   mainWindow.maximize();
 
-  // and load the index.html of the app.
-  // Determine extension type
-  // I should eventually make a splashscreen
-  mainWindow.loadUrl('file://' + __dirname + '/markdown.html');
+  // Load the index.html of the app.
+  mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
 
   // Open the DevTools.
-  mainWindow.openDevTools();
+  // mainWindow.openDevTools();
 
   // Global filename
   var filename;
   // Global Extension
   var extension;
 
-  /** Save function **/
+  /**
+   * save file function
+   * @param arg :: Not going to lie... I don't remember what arg does.
+   */
   function save(arg) {
     if (filename != undefined) {
       fs.writeFile(filename, arg, 'utf8', function(err) {
         if (err) {
+          // There was an error in the process of saving the file
           console.log(err);
+          error('danger', "<strong>Uh-Oh!</strong> The file could not be saved");
           throw err;
         } else {
           error('success', "<strong>Success!</strong> File Saved");
@@ -79,11 +92,16 @@ app.on('ready', function() {
         }
       });
     } else {
-      error('danger', "<strong>Uh-Oh!</strong> The file could not be saved");
+      // Most likely, the save was aborted by the user
       return false;
     }
   }
 
+  /**
+   * error function.  Sends an error message to the renderer process
+   * @param type :: common bootstrap error types.  'succcess', 'danger', 'warning'
+   * @param message :: the message of the error
+   */
   function error(type, message) {
     var data = {
       type: type,
@@ -92,9 +110,11 @@ app.on('ready', function() {
     mainWindow.send('error', data);
   }
 
+  // The menu.  This is where most of the work is being done.
   var appmenu_template = [{
     label: 'Proton',
     submenu: [{
+      // About the project
       label: 'About Proton',
       click: function() {
         ipc.send('open-url-in-external', 'http://github/steventhanna/proton/')
@@ -102,12 +122,15 @@ app.on('ready', function() {
     }, {
       type: 'separator'
     }, {
+      // Preferences
+      // TODO :: Implement this
       label: 'Preferences',
       accelerator: 'CmdOrCtrl+,',
       click: function() {
         console.log("Preferences");
       }
     }, {
+      // Quit the application
       label: 'Quit',
       accelerator: 'Command+Q',
       click: function() {
@@ -117,15 +140,15 @@ app.on('ready', function() {
   }, {
     label: 'File',
     submenu: [{
+      // Open a file and send its data to the renderer process
       label: 'Open File',
       accelerator: 'CmdOrCtrl+O',
       click: function() {
-        error('success', "Opening a file");
         var fileArray = dialog.showOpenDialog({
           properties: ['openFile'],
           filters: [{
-            name: 'Markdown, LaTeX',
-            extensions: ['md', 'tex']
+            name: 'Markdown',
+            extensions: ['md']
           }],
         });
         // Since we do not have multiple selections enabled, only take first
@@ -133,6 +156,7 @@ app.on('ready', function() {
         if (fileArray != undefined && fileArray.length !== 0) {
           filename = fileArray[0];
           filenameArr = filename.split('.');
+          // Extension is really not needed, but I'll leave it here for now.
           extension = filenameArr[1];
         } else {
           error('danger', "There was a problem.");
@@ -141,29 +165,41 @@ app.on('ready', function() {
         }
         console.log(filename);
         if (filename == undefined) {
-          dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -1");
+          error('danger', "<strong>Uh-Oh!</strong> The file could not be opened.");
+          // dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -1");
         } else {
           try {
             var data = fs.readFile(filename, 'utf8', function(err, data) {
-              if (err) throw err;
+              if (err) {
+                error('danger', "<strong>Uh-Oh!</strong> The file could not be opened.");
+                throw err;
+              }
               if (mainWindow.send('fileContent', data)) {
                 mainWindow.send('extension', extension);
               }
               mainWindow.setTitle(filename + " | Proton");
             });
           } catch (err) {
-            dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -2");
-            error('danger', "The file could not be opened.");
+            // dialog.showErrorBox("Uh-Oh!", "The file could not be opened. -2");
+            error('danger', "<strong>Uh-Oh!</strong> The file could not be opened.");
             console.log(err);
           }
         }
       }
     }, {
-      // TODO :: Implement New File
       label: 'New File',
       accelerator: 'CmdOrCtrl+N',
       click: function() {
-        console.log("NEW FILE CLICKED");
+        if (filename != undefined) {
+          // Save the filename
+          mainWindow.send('getSave');
+          ipc.on('fileSave', function(event, arg) {
+            // Error's are handled internally in the save function
+            save(arg);
+          });
+        }
+        mainWindow.setTitle("Proton");
+        mainWindow.send('fileContent', "");
       }
     }, {
       label: 'Save',
@@ -172,10 +208,8 @@ app.on('ready', function() {
         console.log("Starting file save");
         mainWindow.send('getSave');
         ipc.on('fileSave', function(event, arg) {
-          if (save(arg)) {
-            // Put a banner or a notification in here
-
-          }
+          // Error's are handled internally in the save function
+          save(arg);
         });
       },
     }, {
@@ -184,20 +218,21 @@ app.on('ready', function() {
       click: function() {
         var file;
         dialog.showSaveDialog(mainWindow, function(fileName) {
-          console.log("DIALOG");
           file = fileName;
           filename = file;
           mainWindow.send('getSaveAs');
         });
         ipc.on('fileSaveAs', function(event, arg) {
-          console.log("FILETRIGGER");
           if (save(arg)) {
             var data = fs.readFile(filename, 'utf8', function(err, data) {
-              if (err) throw err;
+              if (err) {
+                error('danger', "<strong>Uh-Oh!</strong> The file could not be loaded.");
+                throw err;
+              }
               mainWindow.send('fileContent', data);
-              mainWindow.setTitle(filename + " | Proton");
             });
           }
+          mainWindow.setTitle(filename + " | Proton");
         });
       }
     }, {

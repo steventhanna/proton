@@ -1,4 +1,6 @@
+// IPC for communication with main process
 var ipc = require('ipc');
+// The marked rendering library
 var marked = require('marked');
 
 /**

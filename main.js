@@ -127,11 +127,11 @@ app.on('ready', function() {
     }, {
       // Preferences
       // TODO :: Implement this
-      label: 'Preferences',
-      accelerator: 'CmdOrCtrl+,',
-      click: function() {
-        console.log("Preferences");
-      }
+      // label: 'Preferences',
+      // accelerator: 'CmdOrCtrl+,',
+      // click: function() {
+      //   console.log("Preferences");
+      // }
     }, {
       // Quit the application
       label: 'Quit',

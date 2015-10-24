@@ -120,7 +120,7 @@ app.on('ready', function() {
       // About the project
       label: 'About Proton',
       click: function() {
-        shell.openExternal('https://github.com/steventhanna/proton');
+        shell.openExternal('https://steventhanna.github.io/proton');
       }
     }, {
       type: 'separator'
@@ -354,12 +354,12 @@ app.on('ready', function() {
     submenu: [{
       label: 'Report Issue',
       click: function() {
-        ipc.send('open-url-in-external', 'https://github.com/steventhanna/proton/issues')
+        shell.openExternal('https://github.com/steventhanna/proton/issues');
       }
     }, {
       label: 'View Source Code on GitHub',
       click: function() {
-        ipc.send('open-url-in-external', 'https://github.com/steventhanna/proton')
+        shell.openExternal('https://github.com/steventhanna/proton/');
       }
     }]
   }]

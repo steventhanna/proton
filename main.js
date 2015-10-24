@@ -159,7 +159,8 @@ app.on('ready', function() {
           // Extension is really not needed, but I'll leave it here for now.
           extension = filenameArr[1];
         } else {
-          error('danger', "There was a problem.");
+          // error('danger', "There was a problem.");
+          // Opening was probably aborted
           console.log("Well, there seems to be a problem with the file array");
           return;
         }
@@ -197,7 +198,37 @@ app.on('ready', function() {
             // Error's are handled internally in the save function
             save(arg);
           });
+        } else {
+          // Check if there is any content
+          mainWindow.send('getSave');
+          ipc.on('fileSave', function(event, arg) {
+            // There is content, and the file has not been previously saved
+            if (arg.length !== 0) {
+              // Prompt the user if they would like to save
+              var options = {
+                type: "question",
+                buttons: ["Save", "Cancel"],
+                message: "Do you want to save?",
+                detail: "The file has not been saved.",
+              }
+              dialog.showMessageBox(mainWindow, options, function(response) {
+                if (response == 0) {
+                  // 'Save as' the file
+                  var file;
+                  dialog.showSaveDialog(mainWindow, function(fileName) {
+                    file = fileName;
+                    filename = file;
+                    mainWindow.send('getSaveAs');
+                  });
+                  ipc.on('fileSaveAs', function(event, arg) {
+                    save(arg);
+                  });
+                }
+              });
+            }
+          });
         }
+
         mainWindow.setTitle("Proton");
         mainWindow.send('fileContent', "");
       }
@@ -205,6 +236,9 @@ app.on('ready', function() {
       label: 'Save',
       accelerator: 'CmdOrCtrl+S',
       click: function() {
+        if (filename == undefined) {
+          error('warning', "The file not been saved yet.  Use <strong>Save As</strong>");
+        }
         console.log("Starting file save");
         mainWindow.send('getSave');
         ipc.on('fileSave', function(event, arg) {

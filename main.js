@@ -16,6 +16,8 @@ var fs = require('fs');
 var pdf = require('html-pdf');
 // Module to render Markdown into HMTL
 var marked = require('marked');
+// Module to manage desktop integration
+var shell = require('shell');
 
 // Set marked renderer settings
 marked.setOptions({
@@ -57,6 +59,7 @@ app.on('ready', function() {
     // These values really don't matter, since the window will just be maximized
     width: 800,
     height: 600,
+    icon: "proton.png"
   });
 
   // Make the window fill the screen
@@ -117,7 +120,7 @@ app.on('ready', function() {
       // About the project
       label: 'About Proton',
       click: function() {
-        ipc.send('open-url-in-external', 'http://github/steventhanna/proton/')
+        shell.openExternal('https://github.com/steventhanna/proton');
       }
     }, {
       type: 'separator'

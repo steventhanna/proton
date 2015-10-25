@@ -1,6 +1,8 @@
 # Proton
 A stand-alone application to quickly preview and edit Markdown files using Electron.
 
+![Proton Screenshot](http://steventhanna.github.io/proton/proton-image.png)
+
 ## Purpose
 As a college student, I needed a way to quickly take rich notes in class.  I have long been a proponent of the Markdown Language, so I decided to download [MacDown](http://macdown.uranusjr.com/) for easy rendering and viewing.  However, upon an OS update on my local machine, the Markdown rendering broke.  Thus, I decided to build my own open-sourced version that is supported on Windows, OSX, and Linux machines using the [Electron Framework](https://github.com/atom/electron).
 

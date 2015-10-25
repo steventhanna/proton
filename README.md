@@ -1,6 +1,7 @@
 # Proton
 A stand-alone application to quickly preview and edit Markdown files using Electron.
 
+![Proton Logo](http://steventhanna.github.io/proton/proton-logo.png)
 ![Proton Screenshot](http://steventhanna.github.io/proton/proton-image.png)
 
 ## Purpose

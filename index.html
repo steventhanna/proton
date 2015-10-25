@@ -8,15 +8,25 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="http://jaxedit.com/note/typejax/typejax.css" /> -->
   <link rel="stylesheet" href="depend/style.css">
   <!-- Latest compiled and minified JavaScript -->
   <script src="depend/jquery.js"></script>
   <script src="depend/marked.js"></script>
+  <!-- <script type="text/javascript" src="http://jaxedit.com/note/typejax/typejax.js"></script> -->
+  <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <!-- <script type="text/x-mathjax-config"> -->
+  <!-- MathJax.Hub.Config({ skipStartupTypeset: true }); -->
+<!-- </script> -->
   <script src="depend/JavaScriptSpellCheck/include.js"></script>
   <script>
     window.$ = window.jQuery = require('./depend/jquery.js');
   </script>
   <style type="text/css" media="screen">
+    html {
+      overflow-x: hidden;
+    }
+
     #editor {
       position: fixed;
       height: 100%;
@@ -33,6 +43,8 @@
       <div id="editor"></div>
     </div>
     <div style="margin-top: 10px;" class="col-lg-6">
+      <div id="error">
+      </div>
       <div class="container">
         <div class="row preview-text" id="previewText"></div>
       </div>
@@ -52,7 +64,6 @@
   <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow_night_eighties");
-    editor.getSession().setMode("ace/mode/markdown");
     editor.getSession().setUseWrapMode(true);
     editor.renderer.setShowGutter(false);
     document.getElementById('editor').style.fontFamily = 'Hack, monospace';
@@ -62,25 +73,7 @@
       enableLiveAutocompletion: false
     });
     document.getElementById('editor').style.fontSize = '14px';
-    marked.setOptions({
-      renderer: new marked.Renderer(),
-      gfm: true,
-      tables: true,
-      breaks: true,
-      pedantic: true,
-      sanitize: true,
-      smartLists: true,
-      smartypants: true
-    });
-    // First initial render
-    var text = editor.getValue();
-    document.getElementById('previewText').innerHTML = marked(text);
     // Render on each change
-    editor.getSession().on('change', function(e) {
-      // e.type, etc
-      var text = editor.getValue();
-      document.getElementById('previewText').innerHTML = marked(text);
-    });
 
     // var ipc = require('ipc');
     // var fileData = editor.getValue();
@@ -89,7 +82,7 @@
 
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="index.js"></script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>

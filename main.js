@@ -196,6 +196,9 @@ app.on('ready', function() {
       label: 'New File',
       accelerator: 'CmdOrCtrl+N',
       click: function() {
+        console.log(filename);
+        // Ready var to see if saving is complete
+        var ready = false;
         if (filename != undefined) {
           // Save the filename
           mainWindow.send('getSave');
@@ -203,6 +206,7 @@ app.on('ready', function() {
             // Error's are handled internally in the save function
             save(arg);
           });
+          ready = true;
         } else {
           // Check if there is any content
           mainWindow.send('getSave');
@@ -227,6 +231,8 @@ app.on('ready', function() {
                   });
                   ipc.on('fileSaveAs', function(event, arg) {
                     save(arg);
+                    ready = true;
+                    mainWindow.send('fileContent', "");
                   });
                 }
               });
@@ -234,8 +240,11 @@ app.on('ready', function() {
           });
         }
 
-        mainWindow.setTitle("Proton");
-        mainWindow.send('fileContent', "");
+        if (ready == true) {
+          mainWindow.setTitle("Proton");
+          filename = undefined;
+          mainWindow.send('fileContent', "");
+        }
       }
     }, {
       label: 'Save',
@@ -287,20 +296,29 @@ app.on('ready', function() {
             left: '.25in'
           },
         };
-        dialog.showSaveDialog(mainWindow, function(destination) {
-          if (filename !== undefined) {
-            fs.readFile(filename, 'utf8', function(err, data) {
-              // if (err) throw err;
-              var info = marked(data);
-              info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
-              // Remove exention
-              pdf.create(info, options).toFile(destination, function(err, res) {
-                if (err) throw err;
-                console.log(res);
+        if (filename == undefined) {
+          error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
+        } else {
+          dialog.showSaveDialog(mainWindow, function(destination) {
+            if (filename != undefined) {
+              fs.readFile(filename, 'utf8', function(err, data) {
+                // if (err) throw err;
+                var info = marked(data);
+                info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
+                // Remove exention
+                pdf.create(info, options).toFile(destination, function(err, res) {
+                  if (err) {
+                    error('danger', "<strong>Uh-Oh!</strong> There was an error exporting to PDF.");
+                    throw err;
+                  } else {
+                    error('success', "<strong>Success!</strong> Markdown has been converted to PDF.");
+                  }
+                  console.log(res);
+                });
               });
-            });
-          }
-        });
+            }
+          });
+        }
       }
     }]
   }, {

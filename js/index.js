@@ -13,6 +13,7 @@ ipc.on('fileContent', fileData => {
   editor.setValue(fileData);
   var text = editor.getValue();
   document.getElementById('previewText').innerHTML = marked(text);
+  hljs.initHighlightingOnLoad();
 });
 
 /**
@@ -76,6 +77,11 @@ $(document).ready(function() {
     smartLists: true,
     smartypants: true
   });
+  marked.setOptions({
+    highlight: function(code) {
+      return require('highlight.js').highlightAuto(code).value;
+    }
+  });
   // First initial render becuase of data injection from main process
   var text = editor.getValue();
   document.getElementById('previewText').innerHTML = marked(text);
@@ -83,6 +89,7 @@ $(document).ready(function() {
   editor.getSession().on('change', function(e) {
     var text = editor.getValue();
     document.getElementById('previewText').innerHTML = marked(text);
+    hljs.initHighlightingOnLoad();
   });
 
   // Attempted implementation of matching scroll positions

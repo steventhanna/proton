@@ -9,10 +9,13 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="http://jaxedit.com/note/typejax/typejax.css" /> -->
+  <link rel="stylesheet" href="depend/default.min.css">
+  <link rel="stylesheet" href="depend/default.min.css">
   <link rel="stylesheet" href="depend/style.css">
   <!-- Latest compiled and minified JavaScript -->
   <script src="depend/jquery.js"></script>
   <script src="depend/marked.js"></script>
+  <script src="depend/highlight.min.js"></script>
   <!-- <script type="text/javascript" src="http://jaxedit.com/note/typejax/typejax.js"></script> -->
   <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
   <!-- <script type="text/x-mathjax-config"> -->
@@ -85,6 +88,7 @@
     // var fileData = editor.getValue();
     // ipc.send('fileSave', fileData);
     // console.log(fileData);
+    hljs.initHighlightingOnLoad();
 
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

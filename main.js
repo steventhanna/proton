@@ -70,7 +70,7 @@ app.on('ready', function() {
 
 
   // Open the DevTools.
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   // Global filename
   var filename;

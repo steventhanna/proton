@@ -23,6 +23,7 @@ _Coming soon_
 
 #### Ubuntu (.deb)
 1. Download the [.deb file](https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb) (amd64 only -- _more support coming soon_)
+
     ```shell 
         $: cd ~/Downloads
         $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb

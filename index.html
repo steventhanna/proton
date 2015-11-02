@@ -69,6 +69,9 @@
         document.getElementById('os-download').innerHTML = "Download Proton for Windows";
         $("#downloadDropdown").append(osx);
         $("#downloadDropdown").append(deb);
+      } else {
+        document.getElementById("os-download").href = "https://github.com/steventhanna/proton/releases";
+        document.getElementById('os-download').innerHTML = "Download Proton";
       }
     });
   </script>

@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="style/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
+  <!-- Load JQuery Dependecy -->
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -37,6 +40,30 @@
     ga('create', 'UA-52623823-4', 'auto');
     ga('send', 'pageview');
   </script>
+
+  <!-- Script to determine the current operating system and show a download button accordingly -->
+  <script>
+      $(document).ready(function() {
+         //Define the operating system download buttons
+         var osx = '<a href="https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-OSX.zip" class="btn btn-lg btn-default download-button" style="margin-top: 20px;">Download Proton for Mac</a>';
+         var win = '<a href="https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Windows.zip" class="btn btn-lg btn-default download-button" style="margin-top: 20px;">Download for Windows</a>';
+         var deb = '<a href="https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb" class="btn btn-lg btn-default download-button" style="margin-top: 20px;">Download .deb</a>';
+
+         //Detect the operating system
+         var os = navigator.platform;
+
+         //Apply the system specific download link
+         if(os == "Macintosh" || os == "MacIntel" || os == "MacPPC") {
+            $("#system-specific-download-links").append(osx);
+         }
+         else if(os == "Linux" || os == "Linux aarch64" || os == "Linux arm5tejl" || os == "Linux arm6l" || os == "Linux i686" || os == "Linux i686 on x_86_64" || os == "Linux i686 X11" || os == "Linux ppc64" || os == "Linux x86_64" || os == "Linux x86_64 X11") {
+            $("#system-specific-download-links").append(deb);
+         }
+         else if(os == "OS/2" || os == "Pocket PC" || os == "Windows" || os == "Win16" || os == "Win32" || os == "WinCE") {
+            $("#system-specific-download-links").append(win);
+         }
+      });
+  </script>
 </head>
 
 <body>
@@ -52,7 +79,10 @@
         <h1>Proton</h1>
         <h3>The open-source markup editor</h3>
         <center>
-          <a href="https://github.com/steventhanna/proton" class="btn btn-lg btn-default" style="margin-top: 20px;">View on GitHub</a>
+          <div id="system-specific-download-links">
+             <a href="https://github.com/steventhanna/proton" class="btn btn-lg btn-default" style="margin-top: 20px;">View on GitHub</a>
+             <a href="https://github.com/steventhanna/proton/releases" class="btn btn-lg btn-default" style="margin-top: 20px;">All Downloads</a>
+          </div>
         </center>
       </div>
     </div>

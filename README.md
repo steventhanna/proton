@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/steventhanna/proton.png?label=ready&title=Ready)](https://waffle.io/steventhanna/proton)
 # Proton
 A stand-alone application to quickly preview and edit Markdown files using Electron.
 

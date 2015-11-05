@@ -320,6 +320,22 @@ app.on('ready', function() {
           });
         }
       }
+    }, {
+      label: 'Export to HTML',
+      accelerator: 'CmdOrCtrl+Alt+E',
+      click: function() {
+        if (filename == undefined) {
+          error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
+        } else {
+          dialog.showSaveDialog(mainWindow, function(destination)) {
+            if (filename != undefined) {
+              fs.readFile(filename, 'utf8', function(err, data) {
+                // Write to an HTML file
+              });
+            }
+          }
+        }
+      },
     }]
   }, {
     label: 'Edit',

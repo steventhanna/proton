@@ -323,20 +323,15 @@ app.on('ready', function() {
     }, {
       label: 'Export to HTML',
       accelerator: 'CmdOrCtrl+Alt+E',
-      // click: function() {
-      //   if (filename == undefined) {
-      //     error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
-      //   } else {
-      //     dialog.showSaveDialog(mainWindow, function(destination)) {
-      //       if (filename != undefined) {
-      //         fs.readFile(filename, 'utf8', function(err, data) {
-      //           // Write to an HTML file
-      //         });
-      //       }
-      //     }
-      //   }
-      // },
-    }]
+      click: function() {
+        if (filename == undefined) {
+          error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
+        } else {
+          var beginning = '<html><head><title>' + filename + '</title>' +
+            '<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">'
+        }
+      }
+    }, ]
   }, {
     label: 'Edit',
     submenu: [{

@@ -301,7 +301,7 @@ app.on('ready', function() {
           error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
         } else {
           dialog.showSaveDialog(mainWindow, function(destination) {
-            if (filename != undefined) {
+            if (filename != undefined && destination != undefined) {
               fs.readFile(filename, 'utf8', function(err, data) {
                 // if (err) throw err;
                 var info = marked(data);
@@ -315,6 +315,42 @@ app.on('ready', function() {
                     error('success', "<strong>Success!</strong> Markdown has been converted to PDF.");
                   }
                   console.log(res);
+                });
+              });
+            }
+          });
+        }
+      }
+    }, {
+      label: 'Export to HTML',
+      accelerator: 'CmdOrCtrl+Shift+E',
+      click: function() {
+        var options = {
+          format: 'Letter',
+          border: {
+            top: '.5in',
+            right: '.25in',
+            bottom: '.5in',
+            left: '.25in'
+          },
+        };
+        if (filename == undefined) {
+          error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
+        } else {
+          dialog.showSaveDialog(mainWindow, function(destination) {
+            if (filename != undefined && destination != undefined) {
+              fs.readFile(filename, 'utf8', function(err, data) {
+                // if (err) throw err;
+                var info = marked(data);
+                info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
+                // Write the data
+                fs.writeFile(destination, info, function(err) {
+                  if (err) {
+                    error('danger', "<strong>Uh-Oh!</strong> There was an error exporting to HTML.");
+                    throw err;
+                  } else {
+                    error('success', "<strong>Success!</strong> Markdown has been converted to HTML.");
+                  }
                 });
               });
             }

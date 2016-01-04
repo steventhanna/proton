@@ -113,3 +113,54 @@ footer {
 footer a {
   color: #fff;
 }
+
+.box {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-family: 'Open Sans', sans-serif;
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+.box-white {
+  background-color: #fff;
+}
+
+.box-purple {
+  background-color: #9b59b6;
+}
+
+.box .heading {
+  text-align: center;
+}
+
+.box-white .heading h1 {
+  color: #9b59b6;
+}
+
+.box .body {
+  margin-top: 20px;
+  padding-top: 0px;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: justify;
+}
+
+.box-purple .heading h1 {
+  color: #fff;
+}
+
+.box-purple .heading h3 {
+  color: #e2e3e4;
+}
+
+.box-purple .body {
+  color: #000;
+}
+
+.box-purple .body a {
+  color: #fff;
+}

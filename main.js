@@ -40,9 +40,14 @@ require('crash-reporter').start();
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
+var init = false;
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function() app.quit();
+app.on('window-all-closed', function() {
+  // Checks to see if app.on('ready') has been run yet
+  if (init == true) {
+    app.quit();
+  }
 });
 
 
@@ -50,6 +55,7 @@ app.on('window-all-closed', function() app.quit();
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
+  init = true;
   mainWindow = new BrowserWindow({
     // These values really don't matter, since the window will just be maximized
     width: 800,
@@ -65,7 +71,7 @@ app.on('ready', function() {
 
 
   // Open the DevTools.
-  mainWindow.openDevTools();
+  // mainWindow.openDevTools();
 
   // Global filename
   var filename;
@@ -315,18 +321,7 @@ app.on('ready', function() {
           });
         }
       }
-    }, {
-      label: 'Export to HTML',
-      accelerator: 'CmdOrCtrl+Alt+E',
-      click: function() {
-        if (filename == undefined) {
-          error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
-        } else {
-          var beginning = '<html><head><title>' + filename + '</title>' +
-            '<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">'
-        }
-      }
-    }, ]
+    }]
   }, {
     label: 'Edit',
     submenu: [{

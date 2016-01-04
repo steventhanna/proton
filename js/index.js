@@ -1,5 +1,6 @@
 // IPC for communication with main process
-var ipc = require("electron").ipcMain;
+// var ipc = require("electron").ipcMain;
+var ipc = require('ipc');
 // The marked rendering library
 var marked = require('marked');
 

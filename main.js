@@ -7,7 +7,7 @@ var Menu = require('menu');
 // Module to create the individual items within the menu
 var MenuItem = require('menu-item');
 // Module to handle communication between main and renderer processes
-var ipc = require('ipc');
+var ipc = require("electron").ipcMain;
 // Module to handle native dialog boxes
 var dialog = require('dialog');
 // Module to control file creation
@@ -18,6 +18,8 @@ var pdf = require('html-pdf');
 var marked = require('marked');
 // Module to manage desktop integration
 var shell = require('shell');
+// Module for crash reporter
+var crashReporter = require('crash-reporter');
 
 // Set marked renderer settings
 marked.setOptions({
@@ -35,7 +37,12 @@ marked.setOptions({
 var menu = new Menu();
 
 // Report crashes to the Electron server.
-require('crash-reporter').start();
+// crashReporter.start({
+//   productName: 'Proton',
+//   companyName: 'Steven T Hanna',
+//   submitURL: 'https://your-domain.com/url-to-submit',
+//   autoSubmit: false
+// });
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -67,7 +74,7 @@ app.on('ready', function() {
   mainWindow.maximize();
 
   // Load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
 
   // Open the DevTools.
@@ -300,7 +307,11 @@ app.on('ready', function() {
         if (filename == undefined) {
           error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
         } else {
-          dialog.showSaveDialog(mainWindow, function(destination) {
+          var fileArr = filename.split(".");
+          var suggestion = fileArr[0] + '.pdf';
+          dialog.showSaveDialog(mainWindow, {
+            defaultPath: suggestion
+          }, function(destination) {
             if (filename != undefined && destination != undefined) {
               fs.readFile(filename, 'utf8', function(err, data) {
                 // if (err) throw err;
@@ -323,7 +334,7 @@ app.on('ready', function() {
       }
     }, {
       label: 'Export to HTML',
-      accelerator: 'CmdOrCtrl+Shift+E',
+      accelerator: 'CmdOrCtrl+R',
       click: function() {
         var options = {
           format: 'Letter',
@@ -337,7 +348,11 @@ app.on('ready', function() {
         if (filename == undefined) {
           error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
         } else {
-          dialog.showSaveDialog(mainWindow, function(destination) {
+          var fileArr = filename.split(".");
+          var suggestion = fileArr[0] + '.html';
+          dialog.showSaveDialog(mainWindow, {
+            defaultPath: suggestion
+          }, function(destination) {
             if (filename != undefined && destination != undefined) {
               fs.readFile(filename, 'utf8', function(err, data) {
                 // if (err) throw err;

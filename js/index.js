@@ -1,5 +1,5 @@
 // IPC for communication with main process
-var ipc = require('ipc');
+var ipc = require("electron").ipcMain;
 // The marked rendering library
 var marked = require('marked');
 
@@ -13,6 +13,7 @@ ipc.on('fileContent', fileData => {
   editor.setValue(fileData);
   var text = editor.getValue();
   document.getElementById('previewText').innerHTML = marked(text);
+  hljs.initHighlightingOnLoad();
 });
 
 /**
@@ -45,13 +46,13 @@ ipc.on('getSaveAs', fileData => {
 ipc.on('error', errorMessage => {
   var type = errorMessage.type;
   var message = errorMessage.message;
-  document.getElementById('error').innerHTML = '<div style="margin-right: 10px;" class="alert alert-' + type + ' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + message + '</div>';
+  document.getElementById('error').innerHTML = '<div style="margin-right: 10px; position: relative;" class="alert alert-' + type + ' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + message + '</div>';
   window.setTimeout(function() {
     var alertT = '.alert-' + type;
     // TODO :: Implement JQuery fade out of alert.
     // $("#error").fadeOut();
     $(alertT).alert('close');
-  }, 2000);
+  }, 3000);
 });
 
 
@@ -76,6 +77,11 @@ $(document).ready(function() {
     smartLists: true,
     smartypants: true
   });
+  marked.setOptions({
+    highlight: function(code) {
+      return require('highlight.js').highlightAuto(code).value;
+    }
+  });
   // First initial render becuase of data injection from main process
   var text = editor.getValue();
   document.getElementById('previewText').innerHTML = marked(text);
@@ -83,6 +89,7 @@ $(document).ready(function() {
   editor.getSession().on('change', function(e) {
     var text = editor.getValue();
     document.getElementById('previewText').innerHTML = marked(text);
+    hljs.initHighlightingOnLoad();
   });
 
   // Attempted implementation of matching scroll positions

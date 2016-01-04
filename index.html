@@ -9,10 +9,13 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="http://jaxedit.com/note/typejax/typejax.css" /> -->
+  <link rel="stylesheet" href="depend/default.min.css">
+  <link rel="stylesheet" href="depend/default.min.css">
   <link rel="stylesheet" href="depend/style.css">
   <!-- Latest compiled and minified JavaScript -->
   <script src="depend/jquery.js"></script>
   <script src="depend/marked.js"></script>
+  <script src="depend/highlight.min.js"></script>
   <!-- <script type="text/javascript" src="http://jaxedit.com/note/typejax/typejax.js"></script> -->
   <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
   <!-- <script type="text/x-mathjax-config"> -->
@@ -33,34 +36,38 @@
       width: 50%;
       padding-top: 20px;
     }
+
+    .preview-text img {
+      width: 100%;
+      height: auto;
+
+    }
   </style>
 </head>
 
 <body>
+
+
+  <nav style="margin-top: 15px;" class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+      <div id="error">
+      </div>
+    </div>
+  </nav>
 
   <div class="row">
     <div class="col-lg-6">
       <div id="editor"></div>
     </div>
     <div style="margin-top: 10px;" class="col-lg-6">
-      <div id="error">
-      </div>
       <div class="container">
         <div class="row preview-text" id="previewText"></div>
       </div>
     </div>
   </div>
 
-  <!-- <div class="container">
-      <div class="row">
-        <h1>Hello World!</h1>
-        We are using io.js <script>document.write(process.version)</script>
-        and Electron <script>document.write(process.versions['electron'])</script>.
-      </div>
-    </div> -->
   <script src="depend/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="depend/src-noconflict/ext-language_tools.js"></script>
-  <!-- //cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css -->
   <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow_night_eighties");
@@ -75,10 +82,7 @@
     document.getElementById('editor').style.fontSize = '14px';
     // Render on each change
 
-    // var ipc = require('ipc');
-    // var fileData = editor.getValue();
-    // ipc.send('fileSave', fileData);
-    // console.log(fileData);
+    hljs.initHighlightingOnLoad();
 
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

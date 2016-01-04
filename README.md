@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/steventhanna/proton.png?label=ready&title=Ready)](https://waffle.io/steventhanna/proton)
 # Proton
 A stand-alone application to quickly preview and edit Markdown files using Electron.
 
@@ -8,9 +9,9 @@ As a college student, I needed a way to quickly take rich notes in class.  I hav
 
 ## Installing
 ### Mac OS X
-1. Download the [Zip File](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-OSX.zip). 
+1. Download the [Zip File](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-OSX.zip).
 2. Unzip the file.
-3. Move `Proton.app` to your Applications Folder. 
+3. Move `Proton.app` to your Applications Folder.
 
 ### Windows
 1. Download the [Zip File](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Windows.zip).
@@ -23,7 +24,7 @@ _Coming soon_
 
 #### Ubuntu (.deb)
 1. Download the [.deb file](https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb) (amd64 only -- _more support coming soon_)
-    ```shell 
+    ```shell
         $: cd ~/Downloads
         $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb
     ```
@@ -31,19 +32,19 @@ _Coming soon_
     ```shell
         sudo dpkg -i proton_0.1.0_amd64.deb
     ```
-    
+
 #### Linux (Binary)
 1. Download and Install the Binary. ([x64](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz)) ([ia32](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.gz))
     ```shell
         $: cd ~/Download
-        
+
         # For x64
         $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz
         $: tar -xzf Proton-Linux_0.1.0_x64.tar.gz
         $: mkdir /opt/Proton
         $: cd /opt/Proton
         $: mv ~/Downloads/Proton-Linux_0.1.0_x64/* .
-        
+
         # For ia32
         $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.g
         $: tar -xzf Proton-Linux_0.1.0_ia32.tar.gz

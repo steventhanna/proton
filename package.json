@@ -8,5 +8,8 @@
     "markdown-pdf": "^5.3.0",
     "marked": "^0.3.5",
     "pygmentize-bundled": "^2.3.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.1.0"
   }
 }

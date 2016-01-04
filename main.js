@@ -7,7 +7,8 @@ var Menu = require('menu');
 // Module to create the individual items within the menu
 var MenuItem = require('menu-item');
 // Module to handle communication between main and renderer processes
-var ipc = require("electron").ipcMain;
+// var ipc = require("electron").ipcMain;
+var ipc = require('ipc');
 // Module to handle native dialog boxes
 var dialog = require('dialog');
 // Module to control file creation

@@ -209,29 +209,36 @@ let menuTemplate = [{
                 win.webContents.send('file-contents', "");
             } else {
                 // Check if there is any content
+                console.log("MAIN TRIGGER");
                 win.webContents.send('check-content');
+                var checking = false;
                 ipc.on('checked-content', function(event, data) {
-                    if (data == undefined || data.length == 0) {
-                        // No data to be saved
-                        win.webContents.send('file-contents', "");
-                    } else {
-                        // Find out if the content should be saved
-                        var options = {
-                            type: 'question',
-                            buttons: ["Save", "Cancel"],
-                            message: "Do you want to save?",
-                            detail: "There are unsaved changes, and the file has not yet been saved."
-                        };
-                        dialog.showMessageBox(options, function(index) {
-                            if (index == 0) {
-                                // Save as the file
-                                saveFileDialog(function() {
+                    if (checking == false) {
+                        console.log("IPC TRIGGER");
+                        if (data == undefined || data.length == 0) {
+                            // No data to be saved
+                            win.webContents.send('file-contents', "");
+                        } else {
+                            // Find out if the content should be saved
+                            checking = true;
+                            console.log("DIALOG TRIGGER");
+                            var options = {
+                                type: 'question',
+                                buttons: ["Save", "Cancel"],
+                                message: "Do you want to save?",
+                                detail: "There are unsaved changes, and the file has not yet been saved."
+                            };
+                            dialog.showMessageBox(options, function(index) {
+                                if (index == 0) {
+                                    // Save as the file
+                                    saveFileDialog(function() {
+                                        win.webContents.send('file-contents', "");
+                                    });
+                                } else {
                                     win.webContents.send('file-contents', "");
-                                });
-                            } else {
-                                win.webContents.send('file-contents', "");
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
                 });
             }

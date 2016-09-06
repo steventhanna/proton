@@ -37,14 +37,14 @@ _Coming soon_
 1. Download and Install the Binary. ([x64](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz)) ([ia32](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.gz))
     ```
     $: cd ~/Download
-    
+
     # For x64
     $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz
     $: tar -xzf Proton-Linux_0.1.0_x64.tar.gz
     $: mkdir /opt/Proton
     $: cd /opt/Proton
     $: mv ~/Downloads/Proton-Linux_0.1.0_x64/* .
-    
+
     # For ia32
     $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.g
     $: tar -xzf Proton-Linux_0.1.0_ia32.tar.gz
@@ -80,3 +80,5 @@ Proton is licensed under the GNU General Public License.  Read the license [here
 - [Ace Editor](http://ace.c9.io/#nav=about)
 - [Hack Typeface](https://github.com/chrissimpkins/Hack)
 - [html-pdf](https://github.com/marcbachmann/node-html-pdf)
+
+**CoverAll Package Script:** `electron-packager proton Proton --platform=linux --arch=all --overwrite && electron-packager proton Proton --platform=win32 --arch=all --icon=proton.ico --overwrite && electron-packager proton Proton --platform=darwin --arch=all --icon=proton.icns --overwrite`

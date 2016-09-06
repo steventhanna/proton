@@ -43,14 +43,15 @@ function createWindow() {
     win = new BrowserWindow({
         width: 800,
         height: 600,
-        show: false
+        show: false,
+        icon: 'proton.png'
     });
 
     // and load the index.html of the app.
     win.loadURL(`file://${__dirname}/index.html`);
 
     // Open the DevTools.
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.once('ready-to-show', () => {
         win.maximize();
@@ -259,16 +260,18 @@ let menuTemplate = [{
             // Open a new file and either put it in the same window
             // or put it in a new window
             selectFileDialog((files) => {
-                globalFilePath = files;
-                // Set the title of the window to the global filename
-                win.setTitle(globalFilePath + " | Proton");
-                // extract the filename
-                var array = globalFilePath.split("/");
-                filename = array[array.length - 1];
-                readFile(files, (content) => {
-                    // Send to page
-                    win.webContents.send('file-contents', content);
-                });
+                if (files != undefined) {
+                    globalFilePath = files;
+                    // Set the title of the window to the global filename
+                    win.setTitle(globalFilePath + " | Proton");
+                    // extract the filename
+                    var array = globalFilePath.split("/");
+                    filename = array[array.length - 1];
+                    readFile(files, (content) => {
+                        // Send to page
+                        win.webContents.send('file-contents', content);
+                    });
+                }
             });
         }
     }, {
@@ -463,9 +466,14 @@ let menuTemplate = [{
     label: 'Help',
     role: 'help',
     submenu: [{
-        label: 'Learn More',
+        label: 'GitHub',
         click: function() {
             electron.shell.openExternal('https://github.com/steventhanna/proton');
+        }
+    }, {
+        label: 'Issues',
+        click: function() {
+            electron.shell.openExternal('https://github.com/steventhanna/proton/issues');
         }
     }]
 }]
@@ -563,10 +571,8 @@ if (process.platform === 'darwin') {
         role: 'front'
     });
 
-    addUpdateMenuItems(menuTemplate[0].submenu, 1);
 }
 
 if (process.platform === 'win32') {
     const helpMenu = menuTemplate[menuTemplate.length - 1].submenu;
-    addUpdateMenuItems(helpMenu, 0);
 }

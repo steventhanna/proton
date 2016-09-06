@@ -63,6 +63,7 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         win = null;
+        app.quit();
     });
 }
 
@@ -111,7 +112,7 @@ app.on('activate', () => {
 function readFile(filePath, callback) {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
-            sendErrorMessage(err);
+            error('danger', '<strong>Uh-Oh!</strong> There was an error reading the file. Error: ' + err);
             callback();
         } else {
             callback(data);
@@ -132,6 +133,7 @@ function writeFile(filePath, contents) {
                 error('danger', "<strong>Uh-Oh!</strong> There was an error saving the file.");
             } else {
                 error("success", "<strong>Success!</strong> The file has been saved.");
+                win.setTitle(filePath + " | Proton");
             }
         });
     }
@@ -164,11 +166,10 @@ function selectFileDialog(callback) {
             extensions: ['md']
         }]
     }, function(file) {
-        if (file == undefined) {
-            sendErrorMessage("There was an error finding the file");
-            callback();
-        } else {
+        if (file != undefined) {
             callback(file[0]);
+        } else {
+            callback(undefined);
         }
     });
 }
@@ -190,10 +191,12 @@ function saveFileDialog(callback) {
         ipc.on('fileSaveAs', function(event, data) {
             writeFile(filePath, data, function(callback) {
                 error('success', "<strong>Success!</strong> File Saved");
+                globalFilePath = filePath;
+                var array = globalFilePath.split("/");
+                filename = array[array.length - 1];
                 callback();
             });
         });
-        callback();
     });
 }
 
@@ -441,21 +444,6 @@ let menuTemplate = [{
                 focusedWindow.toggleDevTools();
             }
         }
-    }, {
-        type: 'separator'
-    }, {
-        label: 'App Menu Demo',
-        click: function(item, focusedWindow) {
-            if (focusedWindow) {
-                const options = {
-                    type: 'info',
-                    title: 'Application Menu Demo',
-                    buttons: ['Ok'],
-                    message: 'This demo is for the Menu section, showing how to create a clickable menu item in the application menu.'
-                }
-                electron.dialog.showMessageBox(focusedWindow, options, function() {})
-            }
-        }
     }]
 }, {
     label: 'Window',
@@ -470,14 +458,6 @@ let menuTemplate = [{
         role: 'close'
     }, {
         type: 'separator'
-    }, {
-        label: 'Reopen Window',
-        accelerator: 'CmdOrCtrl+Shift+T',
-        enabled: false,
-        key: 'reopenMenuItem',
-        click: function() {
-            app.emit('activate');
-        }
     }]
 }, {
     label: 'Help',

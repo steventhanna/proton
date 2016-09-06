@@ -59,10 +59,11 @@ ipc.on('error', (event, errorMessage) => {
     var type = errorMessage.type;
     var message = errorMessage.message;
     document.getElementById('error').innerHTML = '<div style="margin-right: 10px; position: relative;" class="alert alert-' + type + ' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + message + '</div>';
+    $("#error").fadeIn();
     window.setTimeout(function() {
         var alertT = '.alert-' + type;
         // TODO :: Implement JQuery fade out of alert.
-        // $("#error").fadeOut();
+        $("#error").fadeOut();
         // $(alertT).alert('close');
     }, 3000);
 });
@@ -108,7 +109,6 @@ $(document).ready(function() {
     // Attempted implementation of matching scroll positions
     // TODO :: Change from actual position to a ratio.  That might work better
     session.on('changeScrollTop', function(scroll) {
-        console.log(session.getScreenLength());
         // console.log("SCROLL: " + scroll);
         // console.log((scroll / session.getScreenLength()) * 10);
         window.scrollTo(0, scroll);

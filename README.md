@@ -24,33 +24,33 @@ _Coming soon_
 
 #### Ubuntu (.deb)
 1. Download the [.deb file](https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb) (amd64 only -- _more support coming soon_)
-    ```shell
-        $: cd ~/Downloads
-        $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb
+    ```
+    $: cd ~/Downloads
+    $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/proton_0.1.0_amd64.deb
     ```
 2. Install Proton from the .deb file.
-    ```shell
-        sudo dpkg -i proton_0.1.0_amd64.deb
+    ```
+    $: sudo dpkg -i proton_0.1.0_amd64.deb
     ```
 
 #### Linux (Binary)
 1. Download and Install the Binary. ([x64](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz)) ([ia32](https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.gz))
-    ```shell
-        $: cd ~/Download
-
-        # For x64
-        $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz
-        $: tar -xzf Proton-Linux_0.1.0_x64.tar.gz
-        $: mkdir /opt/Proton
-        $: cd /opt/Proton
-        $: mv ~/Downloads/Proton-Linux_0.1.0_x64/* .
-
-        # For ia32
-        $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.g
-        $: tar -xzf Proton-Linux_0.1.0_ia32.tar.gz
-        $: mkdir /opt/Proton
-        $: cd /opt/Proton
-        $: mv ~/Downloads/Proton-Linux_0.1.0_ia32/* .
+    ```
+    $: cd ~/Download
+    
+    # For x64
+    $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_x64.tar.gz
+    $: tar -xzf Proton-Linux_0.1.0_x64.tar.gz
+    $: mkdir /opt/Proton
+    $: cd /opt/Proton
+    $: mv ~/Downloads/Proton-Linux_0.1.0_x64/* .
+    
+    # For ia32
+    $: wget https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Linux_0.1.0_ia32.tar.g
+    $: tar -xzf Proton-Linux_0.1.0_ia32.tar.gz
+    $: mkdir /opt/Proton
+    $: cd /opt/Proton
+    $: mv ~/Downloads/Proton-Linux_0.1.0_ia32/* .
     ```
 
 ## Building

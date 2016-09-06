@@ -63,6 +63,7 @@ ipc.on('error', (event, errorMessage) => {
 $(document).ready(function() {
     // Init Ace editor
     var editor = ace.edit("editor");
+    editor.$blockScrolling = Infinity;
     // Get Ace editor session
     var session = editor.getSession();
     // Set language

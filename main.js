@@ -11,6 +11,9 @@ const globalShortcut = electron.globalShortcut;
 const Menu = electron.Menu;
 const dialog = electron.dialog;
 
+var marked = require('marked');
+var pdf = require('markdown-pdf');
+
 const ipc = require('electron').ipcMain;
 
 // Module for file handling
@@ -31,6 +34,9 @@ let win;
 
 // Global reference of the current file path
 var globalFilePath;
+
+// The filename from the global file path
+var filename;
 
 function createWindow() {
     // Create the browser window.
@@ -242,7 +248,6 @@ let menuTemplate = [{
                     }
                 });
             }
-
         }
     }, {
         label: 'Open',
@@ -252,6 +257,9 @@ let menuTemplate = [{
             // or put it in a new window
             selectFileDialog((files) => {
                 globalFilePath = files;
+                // extract the filename
+                var array = globalFilePath.split("/");
+                filename = array[array.length - 1];
                 readFile(files, (content) => {
                     // Send to page
                     win.webContents.send('file-contents', content);
@@ -282,13 +290,70 @@ let menuTemplate = [{
         label: 'Export to PDF',
         accelerator: 'CmdOrCtrl+E',
         click: function() {
-            // TODO :: Export to PDF
+            var options = {
+                format: 'Letter',
+                border: {
+                    top: '.5in',
+                    right: '.25in',
+                    bottom: '.5in',
+                    left: '.25in'
+                },
+            };
+            if (filename == undefined) {
+                error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
+            } else {
+                var fileArr = filename.split(".");
+                var suggestion = fileArr[0] + '.pdf';
+                dialog.showSaveDialog(win, {
+                    defaultPath: suggestion
+                }, function(destination) {
+                    if (filename != undefined && destination != undefined) {
+                        pdf({
+                            cssPath: "style/codeStyle.css"
+                        }).from(globalFilePath).to(destination, function(err) {
+                            if (err) {
+                                error('danger', "<strong>Uh-Oh!</strong> There was an error exporting to PDF.");
+                            } else {
+                                error('success', "<strong>Success!</strong> Markdown has been converted to PDF.");
+                            }
+                        });
+                    } else {
+                        error('danger', "<strong>Uh-Oh!</strong> No file active.");
+                    }
+                });
+            }
         }
     }, {
         label: "Export to HTML",
         accelerator: 'CmdOrCtrl+R',
         click: function() {
-            // TODO :: Export to HTML
+            var options = {
+                format: 'Letter',
+                border: {
+                    top: '.5in',
+                    right: '.25in',
+                    bottom: '.5in',
+                    left: '.25in'
+                },
+            };
+            if (globalFilePath == undefined) {
+                error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
+            } else {
+                var fileArr = globalFilePath.split('/');
+                var tempArr = fileArr[fileArr.length - 1].split('.');
+                var suggestion = tempArr[0] + '.html';
+                dialog.showSaveDialog({
+                    defaultPath: suggestion
+                }, function(filePath) {
+                    // Get the content from the renderer
+                    win.webContents.send('getSave');
+                    ipc.on('fileSaveAs', function(event, data) {
+
+                    });
+                    callback();
+                });
+                dialog.saveFileDialog()
+            }
         }
     }]
 }, {

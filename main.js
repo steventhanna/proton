@@ -257,6 +257,8 @@ let menuTemplate = [{
             // or put it in a new window
             selectFileDialog((files) => {
                 globalFilePath = files;
+                // Set the title of the window to the global filename
+                win.setTitle(globalFilePath + " | Proton");
                 // extract the filename
                 var array = globalFilePath.split("/");
                 filename = array[array.length - 1];
@@ -299,7 +301,7 @@ let menuTemplate = [{
                     left: '.25in'
                 },
             };
-            if (filename == undefined) {
+            if (filename == undefined || globalFilePath == undefined) {
                 error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
             } else {
                 var fileArr = filename.split(".");
@@ -307,7 +309,8 @@ let menuTemplate = [{
                 dialog.showSaveDialog(win, {
                     defaultPath: suggestion
                 }, function(destination) {
-                    if (filename != undefined && destination != undefined) {
+                    if (destination != undefined) {
+                        error('warning', '<strong>Working...</strong> Attempting to export file.');
                         pdf({
                             cssPath: "style/codeStyle.css"
                         }).from(globalFilePath).to(destination, function(err) {
@@ -317,15 +320,13 @@ let menuTemplate = [{
                                 error('success', "<strong>Success!</strong> Markdown has been converted to PDF.");
                             }
                         });
-                    } else {
-                        error('danger', "<strong>Uh-Oh!</strong> No file active.");
                     }
                 });
             }
         }
     }, {
         label: "Export to HTML",
-        accelerator: 'CmdOrCtrl+R',
+        accelerator: 'CmdOrCtrl+Shift+E',
         click: function() {
             var options = {
                 format: 'Letter',
@@ -336,23 +337,31 @@ let menuTemplate = [{
                     left: '.25in'
                 },
             };
-            if (globalFilePath == undefined) {
+            if (globalFilePath == undefined || filename == undefined) {
                 error('danger', "<strong>Uh-Oh!</strong> No active file to export.");
             } else {
-                var fileArr = globalFilePath.split('/');
-                var tempArr = fileArr[fileArr.length - 1].split('.');
-                var suggestion = tempArr[0] + '.html';
+                var array = filename.split('.');
+                var suggestion = array[0] + '.html';
                 dialog.showSaveDialog({
                     defaultPath: suggestion
-                }, function(filePath) {
-                    // Get the content from the renderer
-                    win.webContents.send('getSave');
-                    ipc.on('fileSaveAs', function(event, data) {
-
-                    });
-                    callback();
+                }, function(destination) {
+                    if (destination != undefined) {
+                        // Tell the user that stuff is happening
+                        error('warning', '<strong>Working...</strong> Attempting to export file.');
+                        // Get the content from the renderer
+                        readFile(globalFilePath, function(data) {
+                            var info = marked(data);
+                            info = '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/css/bootstrap-markdown.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.9.0/js/bootstrap-markdown.min.js"></script><style>.markdown-body{min-width:200px;max-width:790px;margin:0 auto;padding:30px} img {max-width: 100%; max-height: 100%;}</style><div class="container"><div class="markdown-body">' + info + "</div></div>";
+                            fs.writeFile(destination, info, function(err) {
+                                if (err) {
+                                    error('danger', '<strong>Uh-Oh!</strong> There was an error exporting the Markdown to HTML.');
+                                } else {
+                                    error('success', '<strong>Success!</strong> The Markdown was exported to HTML.');
+                                }
+                            });
+                        });
+                    }
                 });
-                dialog.saveFileDialog()
             }
         }
     }]

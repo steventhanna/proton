@@ -26,6 +26,17 @@ ipc.on('getSave', (event, fileData) => {
 });
 
 /**
+ * Save function sent from main process to renderer process.
+ * Get the file content and send it back to the main process for exporting to HTML.
+ */
+ipc.on('getSaveHTML', (event, fileData) => {
+    var editor = ace.edit("editor");
+    var fileData = editor.getValue();
+    ipc.send('fileSaveHTML', fileData);
+});
+
+
+/**
  * getSaveAs function sent from main process to renderer processs.
  * Get the file content and send it back to the main process for save as.
  */

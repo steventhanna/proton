@@ -21,7 +21,6 @@
   <!-- <script type="text/x-mathjax-config"> -->
   <!-- MathJax.Hub.Config({ skipStartupTypeset: true }); -->
 <!-- </script> -->
-  <script src="depend/JavaScriptSpellCheck/include.js"></script>
   <script>
     window.$ = window.jQuery = require('./depend/jquery.js');
   </script>
@@ -29,18 +28,15 @@
     html {
       overflow-x: hidden;
     }
-
     #editor {
       position: fixed;
       height: 100%;
       width: 50%;
       padding-top: 20px;
     }
-
     .preview-text img {
-      width: 100%;
-      height: auto;
-
+      max-width: 100%;
+      max-height: 100%;
     }
   </style>
 </head>
@@ -50,7 +46,7 @@
 
   <nav style="margin-top: 15px;" class="navbar navbar-fixed-top">
     <div class="container-fluid">
-      <div id="error">
+      <div id="error" style="display: none;">
       </div>
     </div>
   </nav>
@@ -81,9 +77,7 @@
     });
     document.getElementById('editor').style.fontSize = '14px';
     // Render on each change
-
     hljs.initHighlightingOnLoad();
-
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="js/index.js"></script>

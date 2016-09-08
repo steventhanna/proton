@@ -317,9 +317,7 @@ let menuTemplate = [{
                 }, function(destination) {
                     if (destination != undefined) {
                         error('warning', '<strong>Working...</strong> Attempting to export file.');
-                        pdf({
-                            cssPath: "style/codeStyle.css"
-                        }).from(globalFilePath).to(destination, function(err) {
+                        pdf().from(globalFilePath).to(destination, function(err) {
                             if (err) {
                                 error('danger', "<strong>Uh-Oh!</strong> There was an error exporting to PDF.");
                             } else {

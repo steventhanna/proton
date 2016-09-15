@@ -16,6 +16,9 @@
   <script src="depend/jquery.js"></script>
   <script src="depend/marked.js"></script>
   <script src="depend/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
   <!-- <script type="text/javascript" src="http://jaxedit.com/note/typejax/typejax.js"></script> -->
   <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
   <!-- <script type="text/x-mathjax-config"> -->
@@ -78,6 +81,7 @@
     document.getElementById('editor').style.fontSize = '14px';
     // Render on each change
     hljs.initHighlightingOnLoad();
+    renderMathInElement(document.getElementById('previewText'));
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="js/index.js"></script>

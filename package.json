@@ -43,6 +43,7 @@
     "electron-shortcut-normalizer": "^1.0.0",
     "highlight.js": "^9.3.0",
     "markdown-pdf": "^7.0.0",
+    "markdown-pdf-fork": "^7.0.2",
     "marked": "^0.3.6"
   }
 }

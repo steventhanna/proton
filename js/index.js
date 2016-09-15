@@ -13,6 +13,7 @@ ipc.on('file-contents', (event, contents) => {
     editor.setValue(contents);
     document.getElementById('previewText').innerHTML = marked(contents);
     hljs.initHighlightingOnLoad();
+    renderMathInElement(document.getElementById('previewText'));
 });
 
 /**
@@ -73,6 +74,7 @@ ipc.on('error', (event, errorMessage) => {
  * When the document is loaded... Styling and editor specific code.
  */
 $(document).ready(function() {
+    renderMathInElement(document.getElementById('previewText'));
     // Init Ace editor
     var editor = ace.edit("editor");
     editor.$blockScrolling = Infinity;
@@ -104,6 +106,7 @@ $(document).ready(function() {
         var text = editor.getValue();
         document.getElementById('previewText').innerHTML = marked(text);
         hljs.initHighlightingOnLoad();
+        renderMathInElement(document.getElementById('previewText'));
     });
 
     // Attempted implementation of matching scroll positions

@@ -12,7 +12,7 @@ const Menu = electron.Menu;
 const dialog = electron.dialog;
 
 var marked = require('marked');
-var pdf = require('markdown-pdf');
+var pdf = require('markdown-pdf-fork');
 
 const ipc = require('electron').ipcMain;
 
@@ -51,7 +51,7 @@ function createWindow() {
     win.loadURL(`file://${__dirname}/index.html`);
 
     // Open the DevTools.
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.once('ready-to-show', () => {
         win.maximize();

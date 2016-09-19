@@ -14,9 +14,6 @@
   <link rel="stylesheet" href="style/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
-  <!-- Load JQuery Dependecy -->
-  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -43,7 +40,6 @@
 
   <!-- Script to determine the current operating system and show a download button accordingly -->
   <script>
-      $(document).ready(function() {
          //Define the operating system download buttons
          var osx = '<a href="https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-OSX.zip" class="btn btn-lg btn-default download-button" style="margin-top: 20px;">Download Proton for Mac</a>';
          var win = '<a href="https://github.com/steventhanna/proton/releases/download/v0.1.0/Proton-Windows.zip" class="btn btn-lg btn-default download-button" style="margin-top: 20px;">Download for Windows</a>';
@@ -62,7 +58,6 @@
          else if(os == "OS/2" || os == "Pocket PC" || os == "Windows" || os == "Win16" || os == "Win32" || os == "WinCE") {
             $("#system-specific-download-links").append(win);
          }
-      });
   </script>
 </head>
 

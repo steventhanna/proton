@@ -39,7 +39,7 @@
     "electron-winstaller": "^2.2.0"
   },
   "dependencies": {
-    "electron-json-storage": "^2.0.0",
+    "electron-json-storage": "^2.1.0",
     "electron-shortcut-normalizer": "^1.0.0",
     "highlight.js": "^9.3.0",
     "markdown-pdf": "^7.0.0",

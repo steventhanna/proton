@@ -13,6 +13,7 @@ const dialog = electron.dialog;
 
 const marked = require('marked');
 const pdf = require('markdown-pdf');
+const storage = require('electron-json-storage');
 
 const ipc = require('electron').ipcMain;
 
@@ -31,6 +32,8 @@ const {
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+
+let settingsWindow;
 
 // Global reference of the current file path
 var globalFilePath;
@@ -66,6 +69,29 @@ function createWindow() {
     win = null;
     app.quit();
   });
+}
+
+function showSettingsWindow() {
+  if (settingsWindow == undefined) {
+    settingsWindow = new BrowserWindow({
+      show: false,
+      icon: 'proton.png',
+      title: "Settings",
+      parent: win
+    });
+
+    settingsWindow.loadURL(`file://${__dirname}/settings.html`);
+
+    settingsWindow.once('ready-to-show', () => {
+      settingsWindow.show();
+    });
+
+    settingsWindow.on('closed', () => {
+      settingsWindow = null;
+    });
+  } else {
+    settingsWindow.show();
+  }
 }
 
 // This method will be called when Electron has finished
@@ -198,6 +224,44 @@ function saveFileDialog(callback) {
         callback();
       });
     });
+  });
+}
+
+function getSetting(key, callback) {
+  storage.get(key, function(err, data) {
+    if (err || data == undefined) {
+      console.log("There was an error getting the setting.");
+      console.log("Error = " + err);
+      error('danger', "<strong>Uh-Oh!</strong> There was an error getting the setting: " + key + ".");
+    } else {
+      callback(data);
+    }
+  });
+}
+
+function getAllSettings(callback) {
+  storage.getAll(function(err, data) {
+    if (err || data == undefined) {
+      console.log("There was an error finding the user.");
+      console.log("Error = " + err);
+      error('danger', "<strong>Uh-Oh!</strong> There was an error getting all of the settings.");
+    } else {
+      callback(data);
+    }
+  });
+}
+
+function setSetting(name, key, value, callback) {
+  storage.set(name, {
+    key: value
+  }, function(err) {
+    if (err) {
+      console.log("There was an error saving the setting.");
+      console.log("Error = " + err);
+      error('danger', "<strong>Uh-Oh!</strong> There was an error saving the setting: " + name + ", " + key + ", " + value + ".");
+    } else {
+      callback();
+    }
   });
 }
 
@@ -531,6 +595,14 @@ if (process.platform === 'darwin') {
     submenu: [{
       label: `About ${name}`,
       role: 'about'
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Settings',
+      acccelerator: 'Command+,',
+      click: function() {
+        showSettingsWindow();
+      }
     }, {
       type: 'separator'
     }, {

@@ -135,9 +135,24 @@ app.on('activate', () => {
 ipc.on('update-theme', function(event, themeData) {
   setSetting('settings', 'theme', themeData, function() {
     // Test to make sure setting can be read
-    getSetting('settings', function(data) {
-      win.webContents.send('page-settings', data);
-    })
+    getSetting('settings', function(pageData) {
+      win.webContents.send('page-settings', pageData);
+      if (settingsWindow != undefined) {
+        settingsWindow.webContents.send('page-settings', pageData);
+      }
+    });
+  });
+});
+
+ipc.on('update-font-size', function(event, fontData) {
+  setSetting('settings', 'fontSize', fontData, function() {
+    getSetting('settings', function(pageData) {
+      console.log(pageData);
+      win.webContents.send('page-settings', pageData);
+      if (settingsWindow != undefined) {
+        settingsWindow.webContents.send('page-settings', pageData);
+      }
+    });
   });
 });
 
@@ -248,14 +263,12 @@ function saveFileDialog(callback) {
 }
 
 function getSetting(key, callback) {
-  console.log("KEY: " + key);
   storage.get(key, function(err, data) {
     if (err || data == undefined) {
       console.log("There was an error getting the setting.");
       console.log("Error = " + err);
       error('danger', "<strong>Uh-Oh!</strong> There was an error getting the setting: " + key + ".");
     } else {
-      console.log("SETTING DATA: " + JSON.stringify(data));
       callback(data);
     }
   });
@@ -274,19 +287,21 @@ function getAllSettings(callback) {
 }
 
 function setSetting(name, key, value, callback) {
-  var temp = {};
-  console.log("KEY: " + key);
-  console.log("VALUE: " + value);
-  temp[key] = value;
-  console.log("SET TEMP: " + JSON.stringify(temp));
-  storage.set(name, temp, function(err) {
-    if (err) {
-      console.log("There was an error saving the setting.");
-      console.log("Error = " + err);
-      error('danger', "<strong>Uh-Oh!</strong> There was an error saving the setting: " + name + ", " + key + ", " + value + ".");
-    } else {
-      callback();
-    }
+  getSetting('settings', function(temp) {
+    console.log("INPUT: " + JSON.stringify(temp));
+    console.log("KEY: " + key);
+    console.log("VALUE: " + value);
+    temp[key] = value;
+    console.log("SET TEMP: " + JSON.stringify(temp));
+    storage.set(name, temp, function(err) {
+      if (err) {
+        console.log("There was an error saving the setting.");
+        console.log("Error = " + err);
+        error('danger', "<strong>Uh-Oh!</strong> There was an error saving the setting: " + name + ", " + key + ", " + value + ".");
+      } else {
+        callback();
+      }
+    });
   });
 }
 

@@ -85,7 +85,7 @@ $(document).ready(function() {
     enableSnippets: true,
     enableLiveAutocompletion: false
   });
-  document.getElementById('editor').style.fontSize = '14px';
+  // document.getElementById('editor').style.fontSize = '14px';
   // Render on each change
   hljs.initHighlightingOnLoad();
   editor.$blockScrolling = Infinity;
@@ -121,15 +121,13 @@ $(document).ready(function() {
       console.log(temp);
       editor.setTheme('ace/theme/' + temp);
     }
+    editor.setFontSize(data.fontSize + "px");
   });
 
   // First initial render becuase of data injection from main process
   var text = editor.getValue();
   document.getElementById('previewText').innerHTML = marked(text);
 
-  // if (editor.getTheme() != undefined) {
-  // editor.setTheme("ace/theme/tomorrow_night_eighties");
-  // }
   // Continous render on every change as recognized by ace editor
   editor.getSession().on('change', function(e) {
     var text = editor.getValue();
@@ -145,12 +143,4 @@ $(document).ready(function() {
     window.scrollTo(0, scroll);
   });
 
-  // Scroll percentage from TODO attmepted.
-  /*
-  var scrollPercentage = 100 * this.scrollBottom / (this.scrollHeight - this.clientHeight);
-  $(window).scroll(function() {
-    // session.setScrollTop($(window).scrollTop());
-  });
-  */
-  // });
 });

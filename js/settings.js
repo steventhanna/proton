@@ -29,13 +29,20 @@ function themeChange(value) {
  * When the document is loaded... Styling and editor specific code.
  */
 $(document).ready(function() {
+  ipc.send('get-settings');
+
   function themeChange(value) {
     console.log("Change: " + value);
     ipc.send('update-theme', value);
   }
 
+  $("#fontSize").on("input", function() {
+    ipc.send('update-font-size', $("#fontSize").val());
+  });
+
   ipc.on('page-settings', (event, data) => {
     // Set the settings attribute
     $("#theme").val(data.theme);
+    $("#fontSize").val(data.fontSize);
   });
 });

@@ -144,6 +144,18 @@ ipc.on('update-theme', function(event, themeData) {
   });
 });
 
+ipc.on('update-key-handler', function(event, keyboardHandlerData) {
+  setSetting('settings', 'keyboardHandler', keyboardHandlerData, function() {
+    // Test to make sure setting can be read
+    getSetting('settings', function(pageData) {
+      win.webContents.send('page-settings', pageData);
+      if (settingsWindow != undefined) {
+        settingsWindow.webContents.send('page-settings', pageData);
+      }
+    });
+  });
+});
+
 ipc.on('update-font-size', function(event, fontData) {
   setSetting('settings', 'fontSize', fontData, function() {
     getSetting('settings', function(pageData) {

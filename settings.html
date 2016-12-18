@@ -25,7 +25,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 page-header">
-          <h1><i class="fa fa-md fa-gear"></i>Settings <button class="btn btn-success pull-right"><i class="fa fa-save"></i>Save Settings</button></h1>
+          <h1><i class="fa fa-md fa-gear"></i>Settings</h1>
         </div>
       </div>
       <div class="row">
@@ -34,7 +34,7 @@
           <form>
             <div class="form-group">
               <label for="theme">Theme</label>
-              <select class="form-control" id="theme" onchange="themeChange(this.value)">
+              <select class="form-control" id="theme">
                 <option value="Chrome">Chrome</option>
                 <option value="Clouds">Clouds</option>
                 <option value="Clouds Midnight">Clouds Midnight</option>
@@ -76,10 +76,30 @@
             <label for="tabSize">Tab Size</label>
             <input id="tabSize" style="width: 10%;" type="number" class="form-control" placeholder="4" />
           </div>
+          <div class="form-group">
+            <label for="keyboardHandler">Keyboard Handler</label>
+            <select class="form-control" id="keyboardHandler">
+              <option value="vim">
+                Vim
+              </option>
+              <option value="ace">
+                Ace
+              </option>
+              <option value="emacs">
+                Emacs
+              </option>
+              <option value="sublime">
+                Sublime
+              </option>
+            </select>
+          </div>
+
         </div>
       </div>
+      <center>
+        <h3>Want More Settings? File a Bug Report</h3>
+      </center>
     </div>
-
   </body>
 
 </html>

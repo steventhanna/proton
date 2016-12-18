@@ -31,10 +31,13 @@ function themeChange(value) {
 $(document).ready(function() {
   ipc.send('get-settings');
 
-  function themeChange(value) {
-    console.log("Change: " + value);
-    ipc.send('update-theme', value);
-  }
+  $("#keyboardHandler").on('change', function(e) {
+    ipc.send('update-key-handler', $(this).val());
+  });
+
+  $("#theme").on('change', function(e) {
+    ipc.send('update-theme', $(this).val());
+  });
 
   $("#fontSize").on("input", function() {
     ipc.send('update-font-size', $("#fontSize").val());
@@ -58,5 +61,6 @@ $(document).ready(function() {
     $("#fontSize").val(data.fontSize);
     document.getElementById('lineNumbers').checked = data.lineNumbers;
     $("#tabSize").val(data.tabSize);
+    $("#keyboardHandler").val(data.keyboardHandler);
   });
 });

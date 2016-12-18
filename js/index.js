@@ -78,12 +78,11 @@ $(document).ready(function() {
   // editor.setTheme("ace/theme/tomorrow_night_eighties");
   editor.getSession().setUseWrapMode(true);
   editor.setShowPrintMargin(false);
-  editor.renderer.setShowGutter(false);
   document.getElementById('editor').style.fontFamily = 'Hack, monospace';
   editor.setOptions({
     enableBasicAutocompletion: true,
-    enableSnippets: true,
-    enableLiveAutocompletion: false
+    enableSnippets: false,
+    enableLiveAutocompletion: true
   });
   // document.getElementById('editor').style.fontSize = '14px';
   // Render on each change
@@ -124,6 +123,8 @@ $(document).ready(function() {
     editor.setFontSize(data.fontSize + "px");
     editor.renderer.setShowGutter(data.lineNumbers);
     editor.session.setTabSize(data.tabSize);
+    console.log(data.keyboardHandler);
+    editor.setKeyboardHandler("Vim");
   });
 
   // First initial render becuase of data injection from main process

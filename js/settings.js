@@ -40,9 +40,23 @@ $(document).ready(function() {
     ipc.send('update-font-size', $("#fontSize").val());
   });
 
+  $("#tabSize").on("input", function() {
+    ipc.send('update-tab-size', $("#tabSize").val());
+  });
+
+  $("#lineNumbers").on('change', function() {
+    if ($("#lineNumbers").prop('checked')) {
+      ipc.send('update-line-numbers', true);
+    } else {
+      ipc.send('update-line-numbers', false);
+    }
+  });
+
   ipc.on('page-settings', (event, data) => {
     // Set the settings attribute
     $("#theme").val(data.theme);
     $("#fontSize").val(data.fontSize);
+    document.getElementById('lineNumbers').checked = data.lineNumbers;
+    $("#tabSize").val(data.tabSize);
   });
 });

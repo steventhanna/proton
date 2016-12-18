@@ -156,6 +156,31 @@ ipc.on('update-font-size', function(event, fontData) {
   });
 });
 
+ipc.on('update-tab-size', function(event, tabData) {
+  console.log("UPDATE TAB SIZE: " + tabData);
+  setSetting('settings', 'tabSize', tabData, function() {
+    getSetting('settings', function(pageData) {
+      console.log(pageData);
+      win.webContents.send('page-settings', pageData);
+      if (settingsWindow != undefined) {
+        settingsWindow.webContents.send('page-settings', pageData);
+      }
+    });
+  });
+});
+
+ipc.on('update-line-numbers', function(event, lineData) {
+  setSetting('settings', 'lineNumbers', lineData, function() {
+    getSetting('settings', function(pageData) {
+      console.log(pageData);
+      win.webContents.send('page-settings', pageData);
+      if (settingsWindow != undefined) {
+        settingsWindow.webContents.send('page-settings', pageData);
+      }
+    });
+  });
+});
+
 ipc.on('get-settings', function(event, data) {
   getSetting('settings', function(pageData) {
     win.webContents.send('page-settings', pageData);
@@ -288,11 +313,7 @@ function getAllSettings(callback) {
 
 function setSetting(name, key, value, callback) {
   getSetting('settings', function(temp) {
-    console.log("INPUT: " + JSON.stringify(temp));
-    console.log("KEY: " + key);
-    console.log("VALUE: " + value);
     temp[key] = value;
-    console.log("SET TEMP: " + JSON.stringify(temp));
     storage.set(name, temp, function(err) {
       if (err) {
         console.log("There was an error saving the setting.");

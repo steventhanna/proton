@@ -122,6 +122,8 @@ $(document).ready(function() {
       editor.setTheme('ace/theme/' + temp);
     }
     editor.setFontSize(data.fontSize + "px");
+    editor.renderer.setShowGutter(data.lineNumbers);
+    editor.session.setTabSize(data.tabSize);
   });
 
   // First initial render becuase of data injection from main process

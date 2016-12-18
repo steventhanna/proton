@@ -1,0 +1,41 @@
+// IPC for communication with main process
+const ipc = require('electron').ipcRenderer;
+// The marked rendering library
+// var marked = require('marked');
+
+
+/**
+ * error function handles errors sent from the main process.
+ * Errors should appear on the rendered side of the display.
+ */
+ipc.on('error', (event, errorMessage) => {
+  var type = errorMessage.type;
+  var message = errorMessage.message;
+  document.getElementById('error').innerHTML = '<div style="margin-right: 10px; position: relative;" class="alert alert-' + type + ' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + message + '</div>';
+  $("#error").fadeIn();
+  window.setTimeout(function() {
+    var alertT = '.alert-' + type;
+    // TODO :: Implement JQuery fade out of alert.
+    $("#error").fadeOut();
+    // $(alertT).alert('close');
+  }, 3000);
+});
+
+function themeChange(value) {
+  ipc.send('update-theme', value);
+}
+
+/**
+ * When the document is loaded... Styling and editor specific code.
+ */
+$(document).ready(function() {
+  function themeChange(value) {
+    console.log("Change: " + value);
+    ipc.send('update-theme', value);
+  }
+
+  ipc.on('page-settings', (event, data) => {
+    // Set the settings attribute
+    $("#theme").val(data.theme);
+  });
+});

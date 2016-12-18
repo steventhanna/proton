@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <title>Settings | Proton</title>
     <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script> -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/hack.min.css">
+    <link rel="stylesheet" href="style/font-awesome.min.css" />
+    <link rel="stylesheet" href="style/settings.css" />
     <!-- <link rel="stylesheet" type="text/css" href="http://jaxedit.com/note/typejax/typejax.css" /> -->
     <!-- <link rel="stylesheet" href="depend/default.min.css"> -->
     <!-- Latest compiled and minified JavaScript -->
@@ -15,14 +17,53 @@
     <script>
       window.$ = window.jQuery = require('./depend/jquery.js');
     </script>
+
+    <script src="js/settings.js"></script>
   </head>
 
   <body>
     <div class="container">
-      <div class="col-lg-12">
-        <h1>Hello World</h1>
+      <div class="row">
+        <div class="col-lg-12 page-header">
+          <h1><i class="fa fa-md fa-gear"></i>Settings <button class="btn btn-success pull-right"><i class="fa fa-save"></i>Save Settings</button></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Editor Settings</h3>
+          <p>
+            Theme:
+            <select id="theme" onchange="themeChange(this.value)">
+              <option value="Chrome">Chrome</option>
+              <option value="Clouds">Clouds</option>
+              <option value="Clouds Midnight">Clouds Midnight</option>
+              <option value="Cobalt">Cobalt</option>
+              <option value="Crimson Editor">Crimson Editor</option>
+              <option value="Dawn">Dawn</option>
+              <option value="Eclipse">Eclipse</option>
+              <option value="Idle Fingers">Idle Fingers</option>
+              <option value="Kr Theme">Kr Theme</option>
+              <option value="Merbivore">Merbivore</option>
+              <option value="Merbivore Soft">Merbivore Soft</option>
+              <option value="Mono Industrial">Mono Industrial</option>
+              <option value="Monokai">Monokai</option>
+              <option value="Pastel On Dark">Pastel On Dark</option>
+              <option value="Solarized Dark">Solarized Dark</option>
+              <option value="Solarized Light">Solarized Light</option>
+              <option value="TextMate">TextMate</option>
+              <option value="Tomorrow">Tomorrow</option>
+              <option value="Tomorrow Night">Tomorrow Night</option>
+              <option value="Tomorrow Night Blue">Tomorrow Night Blue</option>
+              <option value="Tomorrow Night Bright">Tomorrow Night Bright</option>
+              <option selected="selected" value="Tomorrow Night Eighties">Tomorrow Night Eighties</option>
+              <option value="Twilight">Twilight</option>
+              <option value="Vibrant Ink">Vibrant Ink</option>
+          </select>
+          </p>
+        </div>
       </div>
     </div>
+
   </body>
 
 </html>

@@ -27,7 +27,7 @@ const {
 
 // Determine if it should use application accelerator
 getSetting('settings', function(pageData) {
-  if (pageData.hardwareAcceleration == false) {
+  if (pageData.hardwareAcceleration == false && !process.argv[process.argv.length - 1].includes('disable-gpu')) {
     app.quit();
     app.relaunch({
       args: process.argv.slice(1).concat(['--disable-gpu'])

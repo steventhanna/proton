@@ -75,10 +75,8 @@ $(document).ready(function() {
   // Init Ace editor
   ipc.send('get-settings');
   var editor = ace.edit("editor");
-  // editor.setTheme("ace/theme/tomorrow_night_eighties");
   editor.getSession().setUseWrapMode(true);
   editor.setShowPrintMargin(false);
-  // document.getElementById('editor').style.fontFamily = 'Hack';
   editor.setOptions({
     enableBasicAutocompletion: true,
     enableSnippets: false,
@@ -109,21 +107,19 @@ $(document).ready(function() {
   });
 
   ipc.on('page-settings', (event, data) => {
-    console.log(data);
     if (data.theme != undefined) {
       changed = true;
       var temp = data.theme.toLowerCase();
       while (temp.includes(" ")) {
         temp = temp.replace(" ", "_");
       }
-      console.log(temp);
       editor.setTheme('ace/theme/' + temp);
     }
     editor.setFontSize(data.fontSize + "px");
     editor.renderer.setShowGutter(data.lineNumbers);
     editor.session.setTabSize(data.tabSize);
     console.log(data.keyboardHandler);
-    editor.setKeyboardHandler("Vim");
+    editor.setKeyboardHandler('ace/keyboard/' + data.keyboardHandler);
     document.getElementById('editor').style.fontFamily = data.fontFamily;
   });
 

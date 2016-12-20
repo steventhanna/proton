@@ -78,13 +78,12 @@ $(document).ready(function() {
   // editor.setTheme("ace/theme/tomorrow_night_eighties");
   editor.getSession().setUseWrapMode(true);
   editor.setShowPrintMargin(false);
-  document.getElementById('editor').style.fontFamily = 'Hack, monospace';
+  // document.getElementById('editor').style.fontFamily = 'Hack';
   editor.setOptions({
     enableBasicAutocompletion: true,
     enableSnippets: false,
     enableLiveAutocompletion: true
   });
-  // document.getElementById('editor').style.fontSize = '14px';
   // Render on each change
   hljs.initHighlightingOnLoad();
   editor.$blockScrolling = Infinity;
@@ -125,6 +124,7 @@ $(document).ready(function() {
     editor.session.setTabSize(data.tabSize);
     console.log(data.keyboardHandler);
     editor.setKeyboardHandler("Vim");
+    document.getElementById('editor').style.fontFamily = data.fontFamily;
   });
 
   // First initial render becuase of data injection from main process

@@ -24,6 +24,17 @@ const fs = require('fs');
 const {
   app
 } = electron;
+
+// Determine if it should use application accelerator
+getSetting('settings', function(pageData) {
+  if (pageData.hardwareAcceleration == false) {
+    app.quit();
+    app.relaunch({
+      args: process.argv.slice(1).concat(['--disable-gpu'])
+    });
+  }
+});
+
 // Module to create native browser window.
 const {
   BrowserWindow
@@ -156,6 +167,20 @@ ipc.on('update-key-handler', function(event, keyboardHandlerData) {
   });
 });
 
+ipc.on('update-hardware-accleration', function(event, hardwareData) {
+  setSetting('settings', 'hardwareAcceleration', hardwareData, function() {
+    // Restart the app
+    // Attempt to save the content First
+    // if (globalFilePath != undefined) {
+    //   win.webContents.send('getSave');
+    // } else {
+    //   win.webContents.send('getSaveAs');
+    // }
+    app.quit();
+    app.relaunch();
+  });
+});
+
 ipc.on('update-font-size', function(event, fontData) {
   setSetting('settings', 'fontSize', fontData, function() {
     getSetting('settings', function(pageData) {
@@ -168,8 +193,19 @@ ipc.on('update-font-size', function(event, fontData) {
   });
 });
 
+ipc.on('update-font-family', function(event, fontData) {
+  console.log("FONT FAMILY: " + fontData);
+  setSetting('settings', 'fontFamily', fontData, function() {
+    getSetting('settings', function(pageData) {
+      win.webContents.send('page-settings', pageData);
+      if (settingsWindow != undefined) {
+        settingsWindow.webContents.send('page-settings', pageData);
+      }
+    });
+  });
+});
+
 ipc.on('update-tab-size', function(event, tabData) {
-  console.log("UPDATE TAB SIZE: " + tabData);
   setSetting('settings', 'tabSize', tabData, function() {
     getSetting('settings', function(pageData) {
       console.log(pageData);
@@ -200,6 +236,10 @@ ipc.on('get-settings', function(event, data) {
       settingsWindow.webContents.send('page-settings', pageData);
     }
   });
+});
+
+ipc.on('view-issues', function(event, data) {
+  electron.shell.openExternal('https://github.com/steventhanna/proton/issues');
 });
 
 /**

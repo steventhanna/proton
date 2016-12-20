@@ -68,6 +68,10 @@
                 All sizes in pixels. No need to write pixels after the number
               </p>
             </div>
+            <div class="form-group">
+              <label for="fontFamily">Font Family</label>
+              <input id="fontFamily" style="width: 30%;" type="text" class="form-control" placeholder="Hack" />
+            </div>
             <div class="checkbox">
               <label><input type="checkbox" id="lineNumbers"/> <strong>Line Numbers</strong></label>
             </div>
@@ -93,11 +97,16 @@
               </option>
             </select>
           </div>
-
+          <div class="checkbox form-group">
+            <label><input type="checkbox" id="hardwareAcceleration"/> <strong>Hardware Acceleration</strong></label>
+            <p class="help-block">
+              Proton will have to restart for hardware acceleration changes to take effect.
+            </p>
+          </div>
         </div>
       </div>
       <center>
-        <h3>Want More Settings? File a Bug Report</h3>
+        <button id="moreSettings" class="btn btn-primary" style="margin-bottom: 20px;">Want more settings?</button>
       </center>
     </div>
   </body>

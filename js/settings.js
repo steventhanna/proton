@@ -43,6 +43,10 @@ $(document).ready(function() {
     ipc.send('update-font-size', $("#fontSize").val());
   });
 
+  $("#fontFamily").on('input', function() {
+    ipc.send('update-font-family', $("#fontFamily").val());
+  });
+
   $("#tabSize").on("input", function() {
     ipc.send('update-tab-size', $("#tabSize").val());
   });
@@ -55,12 +59,26 @@ $(document).ready(function() {
     }
   });
 
+  $("#hardwareAcceleration").on('change', function() {
+    if ($("#hardwareAcceleration").prop('checked')) {
+      ipc.send('update-hardware-accleration', true);
+    } else {
+      ipc.send('update-hardware-accleration', false);
+    }
+  });
+
+  $("#moreSettings").click(function() {
+    ipc.send('view-issues');
+  });
+
   ipc.on('page-settings', (event, data) => {
     // Set the settings attribute
     $("#theme").val(data.theme);
     $("#fontSize").val(data.fontSize);
     document.getElementById('lineNumbers').checked = data.lineNumbers;
+    document.getElementById('hardwareAcceleration').checked = data.hardwareAcceleration;
     $("#tabSize").val(data.tabSize);
     $("#keyboardHandler").val(data.keyboardHandler);
+    $("#fontFamily").val(data.fontFamily);
   });
 });

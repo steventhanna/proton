@@ -1,86 +1,70 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Proton</title>
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="http://jaxedit.com/note/typejax/typejax.css" /> -->
-  <link rel="stylesheet" href="depend/default.min.css">
-  <link rel="stylesheet" href="depend/default.min.css">
-  <link rel="stylesheet" href="depend/style.css">
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="depend/jquery.js"></script>
-  <script src="depend/marked.js"></script>
-  <script src="depend/highlight.min.js"></script>
-  <!-- <script type="text/javascript" src="http://jaxedit.com/note/typejax/typejax.js"></script> -->
-  <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-  <!-- <script type="text/x-mathjax-config"> -->
-  <!-- MathJax.Hub.Config({ skipStartupTypeset: true }); -->
-<!-- </script> -->
-  <script>
-    window.$ = window.jQuery = require('./depend/jquery.js');
-  </script>
-  <style type="text/css" media="screen">
-    html {
-      overflow-x: hidden;
-    }
-    #editor {
-      position: fixed;
-      height: 100%;
-      width: 50%;
-      padding-top: 20px;
-    }
-    .preview-text img {
-      max-width: 100%;
-      max-height: 100%;
-    }
-  </style>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Proton</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/hack.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://jaxedit.com/note/typejax/typejax.css" /> -->
+    <link rel="stylesheet" href="depend/default.min.css">
+    <link rel="stylesheet" href="depend/style.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="depend/jquery.js"></script>
+    <script src="depend/marked.js"></script>
+    <script src="depend/highlight.min.js"></script>
+    <!-- <script type="text/javascript" src="http://jaxedit.com/note/typejax/typejax.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+    <!-- <script type="text/x-mathjax-config"> -->
+    <!-- MathJax.Hub.Config({ skipStartupTypeset: true }); -->
+    <!-- </script> -->
+    <script>
+      window.$ = window.jQuery = require('./depend/jquery.js');
+    </script>
+    <style type="text/css" media="screen">
+      html {
+        overflow-x: hidden;
+      }
 
-<body>
+      #editor {
+        position: fixed;
+        height: 100%;
+        width: 50%;
+        padding-top: 20px;
+      }
+
+      .preview-text img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
 
 
-  <nav style="margin-top: 15px;" class="navbar navbar-fixed-top">
-    <div class="container-fluid">
-      <div id="error" style="display: none;">
+    <nav style="margin-top: 15px;" class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <div id="error" style="display: none;">
+        </div>
+      </div>
+    </nav>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div id="editor"></div>
+      </div>
+      <div style="margin-top: 10px;" class="col-lg-6">
+        <div class="container">
+          <div class="row preview-text" id="previewText"></div>
+        </div>
       </div>
     </div>
-  </nav>
 
-  <div class="row">
-    <div class="col-lg-6">
-      <div id="editor"></div>
-    </div>
-    <div style="margin-top: 10px;" class="col-lg-6">
-      <div class="container">
-        <div class="row preview-text" id="previewText"></div>
-      </div>
-    </div>
-  </div>
-
-  <script src="depend/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="depend/src-noconflict/ext-language_tools.js"></script>
-  <script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/tomorrow_night_eighties");
-    editor.getSession().setUseWrapMode(true);
-    editor.renderer.setShowGutter(false);
-    document.getElementById('editor').style.fontFamily = 'Hack, monospace';
-    editor.setOptions({
-      enableBasicAutocompletion: true,
-      enableSnippets: true,
-      enableLiveAutocompletion: false
-    });
-    document.getElementById('editor').style.fontSize = '14px';
-    // Render on each change
-    hljs.initHighlightingOnLoad();
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="js/index.js"></script>
-</body>
+    <script src="depend/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="depend/src-noconflict/ext-language_tools.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 
 </html>

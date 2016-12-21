@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/app.asar</key>
 		<data>
-		FQ6gnBuECi7s8bG9jdjPp9Acoy8=
+		eRwPnx1xJiIO37JvqV4jPyoUQi8=
 		</data>
 		<key>Resources/app.asar.unpacked/node_modules/phantomjs-prebuilt/.eslintignore</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Resources/app.asar.unpacked/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs</key>
 		<data>
-		m99bzCjXjpG2uanYApk39PLD6BY=
+		IHHVP0Eq1+ik3wkeIhG8NM4H52c=
 		</data>
 		<key>Resources/app.asar.unpacked/node_modules/phantomjs-prebuilt/lib/phantom/examples/arguments.js</key>
 		<data>
@@ -491,7 +491,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			S3GuJ64XzHPKqdbAu4B4/Sg5M9E=
+			BNVqNom7OcKe+/iNvEv89UtbBlM=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.github.electron.framework" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: steventhanna@me.com (ATC64AX9VY)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -545,7 +545,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			LQx728QD9Irgkw6ve3ZkgEDGi3U=
+			Js543HtFCQicKcAeI3VKzNZ+Qms=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.github.Squirrel" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: steventhanna@me.com (ATC64AX9VY)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -554,11 +554,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FQ6gnBuECi7s8bG9jdjPp9Acoy8=
+			eRwPnx1xJiIO37JvqV4jPyoUQi8=
 			</data>
 			<key>hash2</key>
 			<data>
-			KRcR/P4HBlsCDfDq2btvW019ExV/CxX7kd6E1MeRPVQ=
+			E4IDFI8tBL0F/dHZOtHNdsPPe3JpVj1k1HtUYca1QV4=
 			</data>
 		</dict>
 		<key>Resources/app.asar.unpacked/node_modules/phantomjs-prebuilt/.eslintignore</key>
@@ -675,11 +675,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			m99bzCjXjpG2uanYApk39PLD6BY=
+			IHHVP0Eq1+ik3wkeIhG8NM4H52c=
 			</data>
 			<key>hash2</key>
 			<data>
-			0LiUzgLOaTxtMA8g2h3uEuj8pv2Y5P/00Xg+EKI9920=
+			jfZvhTBfpkrbeZnWoMRGvxvi+RiTqoTZzry+HEGDQhg=
 			</data>
 		</dict>
 		<key>Resources/app.asar.unpacked/node_modules/phantomjs-prebuilt/lib/phantom/examples/arguments.js</key>

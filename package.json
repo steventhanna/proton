@@ -7,6 +7,8 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron . --debug",
+    "pack": "build --dir",
+    "dist": "build -mwl",
     "pack-mac": "electron-packager . --asar --asar-unpack=protocol-link.html --overwrite --platform=darwin --arch=x64 --icon=assets/app-icon/mac/app.icns --prune=true --out=out --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
     "pack-win": "electron-packager . ElectronAPIDemos --asar --asar-unpack=protocol-link.html --overwrite --platform=win32 --arch=ia32 --icon=assets/app-icon/win/app.ico --prune=true --out=out --version-string.CompanyName='GitHub, Inc.' --version-string.FileDescription='Electron API Demos' --version-string.ProductName='Electron API Demos'",
     "pack-linux": "electron-packager . --asar --asar-unpack=protocol-link.html --overwrite --platform=linux --arch=x64 --icon=assets/app-icon/png/64.png --prune=true --out=out",
@@ -33,6 +35,7 @@
   },
   "homepage": "https://github.com/steventhanna/proton",
   "devDependencies": {
+    "electron-builder": "^10.9.2",
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "^1.2.6",
     "electron-windows-store": "^0.3.0",
@@ -44,5 +47,15 @@
     "highlight.js": "^9.3.0",
     "markdown-pdf": "^7.0.0",
     "marked": "^0.3.6"
+  },
+  "build": {
+    "appID": "id",
+    "mac": {
+      "category": "Text Editing",
+      "iconUrl":  "icons/proton.icns"
+    },
+    "win": {
+      "iconUrl": "icons/proton.ico"
+    }
   }
 }

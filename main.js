@@ -636,6 +636,12 @@ let menuTemplate = [{
     role: 'close'
   }, {
     type: 'separator'
+  }, {
+    label: 'Settings',
+    accelerator: 'CmdOrCtrl+,',
+    click: function() {
+      showSettingsWindow();
+    }
   }]
 }, {
   label: 'Help',

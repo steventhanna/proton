@@ -35,14 +35,14 @@
   },
   "homepage": "https://github.com/steventhanna/proton",
   "devDependencies": {
-    "electron-builder": "^10.9.2",
-    "electron-packager": "^7.0.1",
+    "electron-builder": "^11.5.1",
+    "electron-packager": "^8.5.1",
     "electron-prebuilt": "^1.2.6",
-    "electron-windows-store": "^0.3.0",
+    "electron-windows-store": "^0.9.3",
     "electron-winstaller": "^2.2.0"
   },
   "dependencies": {
-    "electron-json-storage": "^2.1.0",
+    "electron-json-storage": "^3.0.0",
     "electron-shortcut-normalizer": "^1.0.0",
     "highlight.js": "^9.3.0",
     "markdown-pdf": "^7.0.0",

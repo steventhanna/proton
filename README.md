@@ -1,5 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/steventhanna/proton.png?label=ready&title=Ready)](https://waffle.io/steventhanna/proton)
 # Proton
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/steventhanna/proton.svg)](https://greenkeeper.io/)
 A stand-alone application to quickly preview and edit Markdown files using Electron.
 
 ![Proton Screenshot](http://steventhanna.github.io/proton/proton-image.png)

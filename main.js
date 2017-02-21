@@ -493,8 +493,11 @@ let menuTemplate = [{
           defaultPath: suggestion
         }, function(destination) {
           if (destination != undefined) {
+            var options = {
+              cssPath: "style/everything.css"
+            };
             error('warning', '<strong>Working...</strong> Attempting to export file.');
-            pdf().from(globalFilePath).to(destination, function(err) {
+            pdf(options).from(globalFilePath).to(destination, function(err) {
               if (err) {
                 error('danger', "<strong>Uh-Oh!</strong> There was an error exporting to PDF.");
               } else {

@@ -47,7 +47,7 @@
     "electron-shortcut-normalizer": "^1.0.0",
     "highlight.js": "^10.5.0",
     "markdown-pdf": "^10.0.0",
-    "marked": "^1.2.8"
+    "marked": "^2.0.0"
   },
   "build": {
     "appID": "id",

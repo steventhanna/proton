@@ -42,7 +42,7 @@
     "electron-winstaller": "^4.0.1"
   },
   "dependencies": {
-    "electron": "^11.2.1",
+    "electron": "^11.5.0",
     "electron-json-storage": "^4.3.0",
     "electron-shortcut-normalizer": "^1.0.0",
     "highlight.js": "^10.5.0",
